@@ -10,15 +10,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "Game_suffragetto_tp.h"
 
 void menu(char tab[TAM_TAB][TAM_TAB]){
-	int opcion=0;
+	int opcion=0, resp1, resp2, alea;
 		do
 		{
 			//system("cls");
 			printf("Bienvenido al juego  SUFFRAGETTO \n");
-			printf("MENU PRINCIPAL\n");
+			printf("		MENU PRINCIPAL\n");
 			printf("1) JUGAR \n");
 			printf("2) REGLAS DE JUEGO \n");
 			printf("3) INSTRUCCIONES DE USO \n");
@@ -31,7 +32,36 @@ void menu(char tab[TAM_TAB][TAM_TAB]){
 			{
 				case 1:
 					//system("cls");
-
+					printf("			MODO DE JUEGO\n\n");
+					printf("			QUIEN EMPIEZA?\n		1 - Las Sufragistas\n		2 - Los Policias\n 		3 - Aleatorio\n");
+					scanf("%d", &resp1);
+					if(resp1 == 3){
+						srand(time(NULL));
+						alea = rand()%100;
+						if(alea % 2 == 0){
+							resp1 = 1;
+						}else{
+							resp1 = 2;
+						}
+					}
+					printf("			Seleccion de fichas\n		1 - Las Sufragistas\n		2 - Los Policias\n		3 - Aleatorio\n");
+					scanf("%d", &resp2);
+					if(resp2 == 3){
+						srand(time(NULL));
+						alea = rand()%100;
+						if(alea % 2 == 0){
+							resp2 = 1;
+						}else{
+							resp2 = 2;
+						}
+						continue;
+					}
+					Modo = resp1;
+					empieza = resp2;
+					incio_Juego(tab);
+//					else if((resp1 == 1 || resp1 == 2) && (resp2 == 1 || resp2 == 2)){
+//
+//					}
 					//system("PAUSE");
 					break;
 				case 2:
@@ -67,17 +97,93 @@ void menu(char tab[TAM_TAB][TAM_TAB]){
 
 }
 
-void reglas(char tab[TAM_TAB][TAM_TAB]){
-
-
-}
-
-void inicializar_tablero(char tab[TAM_TAB][TAM_TAB]){
-
-}
-
 void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
-
+	int val = 0, ganador = 0;
+	if(Modo == 1){//empiezan las sufragistas
+		if(empieza == 1){//el jugador es sufragista, empieza
+			do{
+				do{//verifica si la posicion es valida
+					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
+					scanf("%d", &fila);
+					printf("Posicion de la columna (j): ");
+					scanf("%d",&colum);
+					if(tab[fila][colum] == SUFRAGISTAS || tab[fila][colum] == LIDERESAS){
+						val = 1;
+					}else{
+						printf("movimiento invalido, vuelva a seleccionar");
+						val = 0;
+					}
+				}while(val == 0);
+				mov_us(tab);//juega el jugador sus parametros son la fila y la columna introducida
+				cond_de_Gan(tab);//funcion que verifica si el jugador que acaba de jugar gano
+				mov_cp(tab);//juega la computadora
+				cond_de_Gan(tab);
+				cond_libertad(tab);//condicion de liberacion de fichas
+			}while(ganador == 1);
+		}else{//la computadora empieza, su pieza son las suffragistas
+			do{
+				mov_cp(tab);//juega la computadora
+				cond_de_Gan(tab);
+				do{
+					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
+					scanf("%d", &fila);
+					printf("Posicion de la columna (j): ");
+					scanf("%d",&colum);
+					if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+						val = 1;
+					}else{
+						printf("Movimiento invalido, vuelva a seleccionar\n");
+						val = 0;
+					}
+				}while(val == 0);
+				mov_us(tab);//juega el jugador sus parametros son la fila y la columna introducida
+				cond_de_Gan(tab);//funcion que verifica si el jugador que acaba de jugar gano
+				cond_libertad(tab);//condicion de liberacion de fichas
+			}while(ganador == 1);
+		}
+	}else{//empiezan los policias
+		if(empieza == 1){//el jugador es sufragista, empieza
+			do{
+				do{
+					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
+					scanf("%d", &fila);
+					printf("Posicion de la columna (j): ");
+					scanf("%d",&colum);
+					if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+						val = 1;
+					}else{
+						printf("movimiento invalido, vuelva a seleccionar");
+						val = 0;
+					}
+				}while(val == 0);
+				mov_us(tab);//juega el jugador sus parametros son la fila y la columna introducida
+				cond_de_Gan(tab);//funcion que verifica si el jugador que acaba de jugar gano
+				mov_cp(tab);//juega la computadora
+				cond_de_Gan(tab);
+				cond_libertad(tab);//condicion de liberacion de fichas
+			}while(ganador == 1);
+		}else{//la computadora empieza, su pieza son las suffragistas
+			do{
+				mov_cp(tab);//juega la computadora
+				cond_de_Gan(tab);
+				do{
+					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
+					scanf("%d", &fila);
+					printf("Posicion de la columna (j): ");
+					scanf("%d",&colum);
+					if(tab[fila][colum] == SUFRAGISTAS || tab[fila][colum] == LIDERESAS){
+						val = 1;
+					}else{
+						printf("Movimiento invalido, vuelva a seleccionar\n");
+						val = 0;
+					}
+				}while(val == 0);
+				mov_us(tab);//juega el jugador sus parametros son la fila y la columna introducida
+				cond_de_Gan(tab);//funcion que verifica si el jugador que acaba de jugar gano
+				cond_libertad(tab);//condicion de liberacion de fichas
+			}while(ganador == 1);
+		}
+	}
 }
 
 void mov_cp (char tab[TAM_TAB][TAM_TAB]){
@@ -96,9 +202,8 @@ void cond_de_Gan(char tab[TAM_TAB][TAM_TAB]){
 
 }
 
-void tablero(char tab[TAM_TAB][TAM_TAB]){
-	int i, j, x,number=0,number1=0;
-
+void inicializar_tablero(char tab[TAM_TAB][TAM_TAB]){
+	int i, j, number = 0,number1 = 0;
 	for(i = 0; i < TAM_TAB; i++){
 
 		for(j = 0; j < TAM_TAB; j++){
@@ -230,15 +335,26 @@ void tablero(char tab[TAM_TAB][TAM_TAB]){
 
 			}
 
-
-			printf(" %c |", tab[i][j]);
 		}
 
+	}
+}
+
+void tablero(char tab[TAM_TAB][TAM_TAB]){
+	int i, j;
+	printf("\n --+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
+	for(i = 0; i < TAM_TAB; i++){
+		for(j = 0; j < TAM_TAB; j++){
+			printf(" %c |", tab[i][j]);
+		}
 		printf("\n --+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
 	}
 }
+
 int main(void) {
+	inicializar_tablero(tab);
 	tablero(tab);
+	menu(tab);
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
 }

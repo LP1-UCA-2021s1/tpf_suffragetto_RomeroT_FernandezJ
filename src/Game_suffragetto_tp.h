@@ -19,7 +19,7 @@ char tab[TAM_TAB][TAM_TAB];
 #define INSPECTORES 	'I'
 
 //casillas libres
-#define THE_ARENA 	'T'
+#define THE_ARENA 	'-'
 #define PRISON 	'R'
 #define HOSPITAL 	'H'
 #define COMMONS_HOUSE 	'C'
@@ -30,8 +30,8 @@ char tab[TAM_TAB][TAM_TAB];
 //seleccion de menu
 int Modo;//seleccion de modo de juego
 int empieza;//quien empieza
-int ficha_J;//con cual ficha juega el usuario
-
+char ficha_J;//con cual ficha juega el usuario
+int fila, colum;
 //FUNCIONES
 /*
  * El MENU muestra las opciones que tiene el jugador
