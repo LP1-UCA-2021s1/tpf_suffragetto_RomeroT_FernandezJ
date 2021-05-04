@@ -110,7 +110,7 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 					if(tab[fila][colum] == SUFRAGISTAS || tab[fila][colum] == LIDERESAS){
 						val = 1;
 					}else{
-						printf("movimiento invalido, vuelva a seleccionar");
+						printf("Seleccion invalida, vuelva a seleccionar\n");
 						val = 0;
 					}
 				}while(val == 0);
@@ -132,7 +132,7 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 					if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
 						val = 1;
 					}else{
-						printf("Movimiento invalido, vuelva a seleccionar\n");
+						printf("Seleccion invalida, vuelva a seleccionar\n");
 						val = 0;
 					}
 				}while(val == 0);
@@ -152,7 +152,7 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 					if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
 						val = 1;
 					}else{
-						printf("movimiento invalido, vuelva a seleccionar");
+						printf("Seleccion invalida, vuelva a seleccionar\n");
 						val = 0;
 					}
 				}while(val == 0);
@@ -174,7 +174,7 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 					if(tab[fila][colum] == SUFRAGISTAS || tab[fila][colum] == LIDERESAS){
 						val = 1;
 					}else{
-						printf("Movimiento invalido, vuelva a seleccionar\n");
+						printf("Seleccion invalida, vuelva a seleccionar\n");
 						val = 0;
 					}
 				}while(val == 0);
