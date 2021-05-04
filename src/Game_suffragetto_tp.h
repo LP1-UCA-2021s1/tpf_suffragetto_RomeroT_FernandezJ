@@ -9,7 +9,7 @@
 #define GAME_SUFFRAGETTO_TP_H_
 
 //tablero
-#define TAM_TAB	 17
+#define TAM_TAB	 18
 char tab[TAM_TAB][TAM_TAB];
 
 //fichas
