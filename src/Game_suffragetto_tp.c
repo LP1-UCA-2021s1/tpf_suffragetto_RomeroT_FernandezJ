@@ -14,9 +14,11 @@
 
 void menu(char tab[TAM_TAB][TAM_TAB]){
 
+
 }
 
 void reglas(char tab[TAM_TAB][TAM_TAB]){
+
 
 }
 

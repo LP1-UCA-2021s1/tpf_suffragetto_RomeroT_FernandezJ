@@ -8,7 +8,6 @@
 #ifndef GAME_SUFFRAGETTO_TP_H_
 #define GAME_SUFFRAGETTO_TP_H_
 
-
 //tablero
 #define TAM_TAB	 17
 char tab[TAM_TAB][TAM_TAB];
@@ -27,6 +26,7 @@ char tab[TAM_TAB][TAM_TAB];
 #define ALBERT_HALL 	'A'
 #define PRISON_YARD 	'Y'
 #define HOSPITAL_GROUNDS 	'G'
+
 //seleccion de menu
 int Modo;//seleccion de modo de juego
 int empieza;//quien empieza
