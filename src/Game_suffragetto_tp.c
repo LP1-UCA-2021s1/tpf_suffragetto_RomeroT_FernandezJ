@@ -320,20 +320,23 @@ int cond_de_Gan(int * ganador){//la condicion de ganador es leer la matriz table
 
 void inicializar_tablero(char tab[TAM_TAB][TAM_TAB]){
 	int i, j, number = 0,number1 = 0;
+
 	for(i = 0; i < TAM_TAB; i++){
 
 		for(j = 0; j < TAM_TAB; j++){
 			if(j==0 && i!=0){
 
-				char post1 = number + 'a';
+				char post1 = number + 'a';//a
 				number = number + 1;
+
 				tab[i][j]=post1;
 
 			}
 			else{
 				if(i==0 && j!=0){
-					char post2 = number1 + 'A';
+					char post2 = number1 + 'A';//A
 					number1 = number1 + 1;
+
 					tab[i][j] = post2;
 
 				}
@@ -461,6 +464,7 @@ void tablero(char tab[TAM_TAB][TAM_TAB]){
 	printf("\n --+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
 	for(i = 0; i < TAM_TAB; i++){
 		for(j = 0; j < TAM_TAB; j++){
+
 			printf(" %c |", tab[i][j]);
 		}
 		printf("\n --+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");

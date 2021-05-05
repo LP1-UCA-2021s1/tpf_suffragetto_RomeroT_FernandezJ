@@ -12,6 +12,7 @@
 #define TAM_TAB	 18
 char tab[TAM_TAB][TAM_TAB];
 
+
 //fichas
 #define SUFRAGISTAS	 'S'
 #define LIDERESAS 	'L'
