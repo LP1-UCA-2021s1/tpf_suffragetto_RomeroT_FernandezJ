@@ -80,11 +80,11 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]);
 /*
  *
  */
-void mov_suf_o_pol (char tab[TAM_TAB][TAM_TAB]);
+void mov_suf_o_pol (int * x, int * y, char tab[TAM_TAB][TAM_TAB]);
 /*
  *
  */
-void mov_lid_o_ins (char tab[TAM_TAB][TAM_TAB]);
+void mov_lid_o_ins (int * x, int * y, char tab[TAM_TAB][TAM_TAB]);
 /*
  * Si el usuario quiere liberar fichas en esta funcion se realiza la "negociacion"
  * si hay 12 piezas en el hospital y 12 piezas en la prision cumple con la condicion,
