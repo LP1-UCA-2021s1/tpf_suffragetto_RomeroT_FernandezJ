@@ -159,8 +159,7 @@ void mov_cp (char tab[TAM_TAB][TAM_TAB]){
 	empieza = 1;
 	if(empieza == 1){//cuando empieza es igual a 1 significa que el usuario tiene las piezas de las sufragistas por lo tanto la computadora juega con la policia
 		do{
-			srand(time(NULL));//busca una posicion random
-			fila = rand()%17;
+			fila = rand()%17;//busca una posicion random
 			colum = rand()%17;
 			if(colum > 1){
 				if(colum == 2){
@@ -191,7 +190,6 @@ void mov_cp (char tab[TAM_TAB][TAM_TAB]){
 	}
 	if(empieza == 2){//si la eleccion del usuario fue jugar con los policias la computadora jugara con las sufragistas
 		do{
-			srand(time(NULL));
 			fila = rand()%17;
 			colum = rand()%17;
 			if(colum > 1){
@@ -550,13 +548,8 @@ void tablero(char tab[TAM_TAB][TAM_TAB]){
 int main(void) {
 	inicializar_tablero(tab);
 	tablero(tab);
-<<<<<<< HEAD
 	mov_cp(tab);
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-=======
 	menu(tab);
-
-
->>>>>>> a4d07a03b6c0966fc84a404906864f918aad2f28
 	return EXIT_SUCCESS;
 }
