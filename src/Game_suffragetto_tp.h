@@ -52,7 +52,7 @@ void menu(char tab[TAM_TAB][TAM_TAB]);
 /*
  * IMPRIME LAS REGLAS
  */
-void reglas(char tab[TAM_TAB][TAM_TAB]);
+void reglas(void);
 /*
  * Esta funcion INICIALIZA EL TABLERO
  * llena las casillas libres dependiendo de la ubicacion
