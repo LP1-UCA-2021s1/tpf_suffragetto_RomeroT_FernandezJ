@@ -78,6 +78,22 @@ void mov_cp (char tab[TAM_TAB][TAM_TAB]);
  */
 void mov_us (char tab[TAM_TAB][TAM_TAB]);
 /*
+ *
+ */
+void mov_suf_o_pol (char tab[TAM_TAB][TAM_TAB]);
+/*
+ *
+ */
+void mov_lid_o_ins (char tab[TAM_TAB][TAM_TAB]);
+/*
+ * Si el usuario quiere liberar fichas en esta funcion se realiza la "negociacion"
+ * si hay 12 piezas en el hospital y 12 piezas en la prision cumple con la condicion,
+ * 6 piezas son llevadas a los patios o terrenos.
+ *
+ */
+void liberacion(char tab[TAM_TAB][TAM_TAB]);
+
+/*
  * EVALUA SI SE PUEDEN LIBERAR FICHAS
  * en esta funcion se verifica si hay fichas que pueden ser liberadas
  * segun las reglas del juego, las fichas que van al hospital o a prision,
@@ -87,13 +103,14 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]);
  * y los de la prision -----> Prison Yard
  */
 void cond_libertad(char tab[TAM_TAB][TAM_TAB]);
+
 /*
  * CONDICION DEL GANADOR
  * Aquel que llegue a meter 6 fichas en
  * Casa de los Comunes ----> COMMONS_HOUSE.... en este caso imprime que "LAS SUFRAGISTAS ENTRARON A LA CASA DE LOS COMUNES, LAS SUFRAGISTAS GANAN!!! :D"
  * Albert Hall ----> ALBERT_HALL.... en este caso imprime que "LOS POLICIAS INGRESARON EN EL TEATRO ALBERT HALL, LOS POLICIAS GANAN... :("
  */
-void cond_de_Gan(char tab[TAM_TAB][TAM_TAB]);
+int cond_de_Gan(int * ganador);
 /*
  * IMPRIME EL TABLERO
  */

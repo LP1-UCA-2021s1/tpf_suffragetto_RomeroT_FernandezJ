@@ -98,7 +98,7 @@ void menu(char tab[TAM_TAB][TAM_TAB]){
 }
 
 void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
-	int val = 0, ganador = 0;
+	int val = 0, ganador = 1;
 	if(Modo == 1){//empiezan las sufragistas
 		if(empieza == 1){//el jugador es sufragista, empieza
 			do{
@@ -115,15 +115,15 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 					}
 				}while(val == 0);
 				mov_us(tab);//juega el jugador sus parametros son la fila y la columna introducida
-				cond_de_Gan(tab);//funcion que verifica si el jugador que acaba de jugar gano
+				cond_de_Gan(&ganador);//funcion que verifica si el jugador que acaba de jugar gano
 				mov_cp(tab);//juega la computadora
-				cond_de_Gan(tab);
+				cond_de_Gan(&ganador);
 				cond_libertad(tab);//condicion de liberacion de fichas
 			}while(ganador == 1);
 		}else{//la computadora empieza, su pieza son las suffragistas
 			do{
 				mov_cp(tab);//juega la computadora
-				cond_de_Gan(tab);
+				cond_de_Gan(&ganador);
 				do{
 					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
 					scanf("%d", &fila);
@@ -137,12 +137,12 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 					}
 				}while(val == 0);
 				mov_us(tab);//juega el jugador sus parametros son la fila y la columna introducida
-				cond_de_Gan(tab);//funcion que verifica si el jugador que acaba de jugar gano
+				cond_de_Gan(&ganador);//funcion que verifica si el jugador que acaba de jugar gano
 				cond_libertad(tab);//condicion de liberacion de fichas
 			}while(ganador == 1);
 		}
 	}else{//empiezan los policias
-		if(empieza == 1){//el jugador es sufragista, empieza
+		if(empieza == 1){//el jugador es sufragista
 			do{
 				do{
 					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
@@ -157,15 +157,15 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 					}
 				}while(val == 0);
 				mov_us(tab);//juega el jugador sus parametros son la fila y la columna introducida
-				cond_de_Gan(tab);//funcion que verifica si el jugador que acaba de jugar gano
+				cond_de_Gan(&ganador);//funcion que verifica si el jugador que acaba de jugar gano
 				mov_cp(tab);//juega la computadora
-				cond_de_Gan(tab);
+				cond_de_Gan(&ganador);
 				cond_libertad(tab);//condicion de liberacion de fichas
 			}while(ganador == 1);
-		}else{//la computadora empieza, su pieza son las suffragistas
+		}else{//la computadora empieza, su pieza son los policias
 			do{
 				mov_cp(tab);//juega la computadora
-				cond_de_Gan(tab);
+				cond_de_Gan(&ganador);
 				do{
 					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
 					scanf("%d", &fila);
@@ -179,27 +179,127 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 					}
 				}while(val == 0);
 				mov_us(tab);//juega el jugador sus parametros son la fila y la columna introducida
-				cond_de_Gan(tab);//funcion que verifica si el jugador que acaba de jugar gano
-				cond_libertad(tab);//condicion de liberacion de fichas
+				cond_de_Gan(&ganador);//funcion que verifica si el jugador que acaba de jugar gano
+				cond_libertad(tab);//condicion de liberacion de fichas, esta condicion se determinara en el momento en que en el hospital y en la prision haya 12 piezas en cada uno
 			}while(ganador == 1);
 		}
 	}
 }
 
 void mov_cp (char tab[TAM_TAB][TAM_TAB]){
-
+	if(empieza == 1){//cuando empieza es igual a 1 significa que el usuario tiene las piezas de las sufragistas por lo tanto la computadora juega con la policia
+		if(tab[fila][colum] == INSPECTORES){
+			mov_lid_o_ins (tab);
+		}if(tab[fila][colum] == POLICIAS){
+			mov_suf_o_pol (tab);
+		}
+	}
+	if(empieza == 2){//si la eleccion del usuario fue jugar con los policias la computadora jugara con las sufragistas
+		if(tab[fila][colum] == LIDERESAS){
+			mov_lid_o_ins(tab);
+		}if(tab[fila][colum] == SUFRAGISTAS){
+			mov_suf_o_pol (tab);
+		}
+	}
 }
 
 void mov_us (char tab[TAM_TAB][TAM_TAB]){
+	if(empieza == 1){//eleccion del usuario jugar con las sufragistas
+		if(tab[fila][colum] == LIDERESAS){
+			mov_lid_o_ins (tab);
+		}if(tab[fila][colum] == SUFRAGISTAS){
+			mov_suf_o_pol (tab);
+		}
+	}
+	if(empieza == 2){//eleccion del usuario jugar con los policias
+		if(tab[fila][colum] == INSPECTORES){
+			mov_lid_o_ins(tab);
+		}if(tab[fila][colum] == POLICIAS){
+			mov_suf_o_pol (tab);
+		}
+	}
+}
+
+void mov_suf_o_pol (char tab[TAM_TAB][TAM_TAB]){
+
+
+}
+
+void mov_lid_o_ins (char tab[TAM_TAB][TAM_TAB]){
+
+}
+
+void liberacion(char tab[TAM_TAB][TAM_TAB]){
 
 }
 
 void cond_libertad(char tab[TAM_TAB][TAM_TAB]){
-
+	int i, j, contador = 0, contador1 = 0;
+	for(i = 0; i < TAM_TAB; i++){
+		for(j = 0; j < TAM_TAB; j++){
+			if(j == 1){
+				if(tab[i][j] == POLICIAS || tab[i][j] == INSPECTORES){//cuenta cuantos policias hay en el hospital
+					contador++;
+				}
+			}
+			if((j == 2) && (0 < i || i < 5)){
+				if(tab[i][j] == POLICIAS || tab[i][j] == INSPECTORES){
+					contador++;
+				}
+			}
+			if(j == 17){
+				if(tab[i][j] == SUFRAGISTAS || tab[i][j] == LIDERESAS){//cuenta cuantas sufragistas hay en la prision
+					contador1++;
+				}
+			}if(j == 16 && (i > 13 || i < 18)){
+				if(tab[i][j] == SUFRAGISTAS || tab[i][j] == LIDERESAS){
+					contador1++;
+				}
+			}
+		}
+	}
+	int x = 0;
+	if(contador >= 12 && contador1 >= 12){//con la condicion cumplida pregunta al usuario si quiere negociar la liberacion de piezas
+		printf("Negociar liberacion de piezas.\n1 - Si\n2 - No (cualquier tecla es un no)\n");
+		scanf("%d", &x);
+		switch(x){
+		case 1:
+			printf("Negociando Liberacion de piezas, podra sacarlas en el sgte turno.\n");
+			liberacion(tab);
+			break;
+		default:
+			printf("Ha decidido no liberar a nadie.\n");
+			break;
+		}
+	}
 }
 
-void cond_de_Gan(char tab[TAM_TAB][TAM_TAB]){
-
+int cond_de_Gan(int * ganador){//la condicion de ganador es leer la matriz tablero y contar las posiciones
+	int i, j, con = 0, cont = 0;
+	for(i = 0; i < TAM_TAB; i++){
+		for(j = 0; j < TAM_TAB; j++){
+			if(tab[i][j] == ALBERT_HALL){//donde se encuentre el Albert Hall
+				con++;//Sumar si no esta ocupado
+			}if(tab[i][j] == COMMONS_HOUSE){//y donde se encuentre la Commons House
+				cont++;
+			}
+		}
+	}
+	/*
+	 * si son mayores a 0 no hace nada,
+	 * pero si con que es el auxiliar contador que cuenta cuantas posiciones del Albert Hall quedan es igual a 0 entonces ganan los policias
+	 * si el cont, auxiliar contador que cuenta cuantas posiciones quedan en la Common House, si es igual a 0 ganan las sufragistas
+	 */
+	if(con == 0){
+		printf("\n		*-*-*-**-*-*GANAN LOS POLICIAS!!!*-*-*-**-*-*");
+		return 2;
+	}
+	if(cont == 0){
+		printf("\n		*-*-*-**-*-*GANAN LAS SUFRAGISTAS!!!*-*-*-**-*-*");
+		return 3;
+	}else{//todavia no hay ganador
+		return 1;
+	}
 }
 
 void inicializar_tablero(char tab[TAM_TAB][TAM_TAB]){
