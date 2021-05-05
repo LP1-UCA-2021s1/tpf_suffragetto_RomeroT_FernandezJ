@@ -258,7 +258,7 @@ void cond_libertad(char tab[TAM_TAB][TAM_TAB]){
 			}
 		}
 	}
-	int x = 0;
+	int x;
 	if(contador >= 12 && contador1 >= 12){//con la condicion cumplida pregunta al usuario si quiere negociar la liberacion de piezas
 		printf("Negociar liberacion de piezas.\n1 - Si\n2 - No (cualquier tecla es un no)\n");
 		scanf("%d", &x);
