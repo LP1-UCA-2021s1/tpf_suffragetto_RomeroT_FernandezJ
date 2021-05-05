@@ -163,19 +163,25 @@ void mov_cp (char tab[TAM_TAB][TAM_TAB]){
 			colum = rand()%17;
 			if(colum > 1){
 				if(colum == 2){
-					if(fila > 4 || fila < 12){
+					if(fila > 4 && fila < 12){
 						if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
 							k = 1;
 							printf("\nfila = %d, colum = %d\n", fila, colum);
 						}
 					}
 				}
-				if(colum == 16){
+				else if(colum == 16){
 					if(fila > 7 && fila < 14){
 						if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
 							k = 1;
 							printf("\nfila = %d, colum = %d\n", fila, colum);
 						}
+					}
+				}
+				else{
+					if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+						k = 1;
+						printf("\nfila = %d, colum = %d\n", fila, colum);
 					}
 				}
 			}
@@ -190,11 +196,11 @@ void mov_cp (char tab[TAM_TAB][TAM_TAB]){
 	}
 	if(empieza == 2){//si la eleccion del usuario fue jugar con los policias la computadora jugara con las sufragistas
 		do{
-			fila = rand()%17;
-			colum = rand()%17;
-			if(colum > 1){
+			fila = rand()%16;
+			colum = rand()%16;
+			if(colum < 17){
 				if(colum == 2){
-					if(fila > 4 || fila < 12){
+					if(fila > 4 && fila < 12){
 						if(tab[fila][colum] == LIDERESAS || tab[fila][colum] == SUFRAGISTAS){
 							k = 1;
 							printf("\nfila = %d, colum = %d\n", fila, colum);
