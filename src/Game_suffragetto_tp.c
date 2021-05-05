@@ -14,10 +14,10 @@
 
 void menu(char tab[TAM_TAB][TAM_TAB]){
 	int opcion=0;
+	printf("¡Bienvenido al juego  SUFFRAGETTO! \n");
 		do
 		{
-			//system("cls");
-			printf("Bienvenido al juego  SUFFRAGETTO \n");
+
 			printf("MENU PRINCIPAL\n");
 			printf("1) JUGAR \n");
 			printf("2) REGLAS DE JUEGO \n");
@@ -26,47 +26,50 @@ void menu(char tab[TAM_TAB][TAM_TAB]){
 			printf("5) SALIR \n\n");
 			printf("Ingrese el numero de la opcion que desea ejecutar:");
 			scanf("%d",&opcion);
-			fflush(stdin);//limpia el buffer de entrada cuando se ingresa un valor no válido
 			switch(opcion)
 			{
 				case 1:
-					//system("cls");
 
-					//system("PAUSE");
 					break;
 				case 2:
-					//system("cls");
-					printf("          ----------REGLAS DE JUEGO----------\n\n");
-					printf(" -Piezas: 21 fichas por jugador; 5 fichas violetas y 16 fichas verdes para un jugador (suffragetto), 5 fichas blancas y 16 fichas azules para el otro jugador (policía). Las fichas violetas representan a lo..\n\n -El objetivo de ambos jugadores es ocupar el área protegida por sus enemigos. Así, los policías desean ocupar el “Albert Hall” mientras que los suffragetto desean ocupar la región “House of Commons”. De esta forma el juego finaliza cuando una de estas dos regiones es ocupada completamente, y gana el jugador que ubicó 6.\n\n -.\n\n -.\n\n -.\n\n ");
-					//system("PAUSE");
+					reglas();
+
+
 					break;
 				case 3:
-					//system("cls");
+
 					printf("          ----------INSTRUCCIONES PARA USO DEL PROGRAMA---------\n\n");
-					printf(" -El programa decidira al azar a quien corresponde el primer turno.\n\n -Para mover las piezas se deben introducir las coordenadas de la pieza a mover y las de la posicion a mover.\n\n -Las coordendas del tablero van del 1 al 17 para las filas y columnas.\n\n -El programa se encargara de advertirle de errores o movimientos invalidos.\n\n -Tambien se encargara de ............. si se da el caso.\n\n -Luego de cada jugada usted vera cuantas........... quedan fuera del tablero y cuantas fueron trapadas por ...........\n\n ");
-					//system("PAUSE");
+					printf(" -El jugador puede elegir quién inicia el juego, quién será suffragetto y quién será policía. O bien los turnos y bandos se definen de forma aleatoria.\n\n -Para mover las piezas se deben introducir las coordenadas de la pieza a mover y las de la posicion a mover.\n\n -Las coordendas del tablero van desde (a) hasta (q) para las filas y desde (A) hasta (Q) para las columnas.\n\n -El programa se encargara de advertirle de errores o movimientos invalidos.\n\n -Cada movimiento valido que usted realice, podra sera corroborado en el tablero de juego.\n\n -Al finalizar el juego, el programa indicara cual es el bando ganador y perdedor.\n\n ");
+
 					break;
 				case 4:
-					//system("cls");
+
 					printf("           -----------CREDITOS----------\n\n");
 					printf("          ----------PROGRAMADORES----------\n\n");
 					printf("                    Julio Fernandez\n\n                          e\n\n                      Tania Romero\n\n");
-					//system("PAUSE");
+
 					break;
 				case 5:
+					printf("¡Gracias por elegir jugar Suffragetto!\nDe parte de los creadores, agradecemos su tiempo y atencion.\n");
 					break;
 				default:
-					//system("cls");
-					printf("Ha ingresado un valor invalido\n");
-					printf("Favor ingrese una opcion del MENU PRINCIPAL\n");
-					//system("PAUSE");
+
+					printf("¡Ha ingresado un valor invalido!\n");
+					printf("Favor ingrese una opcion del MENU PRINCIPAL.\n");
+
 					break;
 			}
 		}while(opcion!=5);
 
 }
 
-void reglas(char tab[TAM_TAB][TAM_TAB]){
+void reglas(void){
+	printf("          ----------REGLAS DE JUEGO----------\n\n");
+	printf("- PIEZAS:\n  Tenemos 21 fichas por jugador; 5 fichas violetas y 16 fichas verdes para un jugador (suffragetto), 5 fichas blancas y 16 fichas azules para el otro\n  jugador (policía). Las fichas violetas representan a los líderes del bando Suffragetto y las blancas son los inspectores del bando Policía.\n\n");
+	printf("- TABLERO: \n  El tablero es de 17x17, dividido en áreas (“Arena”, “Prison”, “Hospital”, “House of Commons”, “Albert Hall”), cada una de las cuales tiene\n  un propósito específico en el desarrollo del juego.\n\n");
+	printf("- OBJETIVO DEL JUEGO: \n  El objetivo de ambos jugadores es ocupar el área protegida por sus enemigos. Así, los policías desean ocupar el “Albert Hall” mientras que los suffragetto\n  desean ocupar la región “House of Commons”. De esta forma el juego finaliza cuando una de estas dos regiones es ocupada completamente, y gana\n  el jugador que ubicó 6 fichas en la región deseada. Se busca principalmente ocupar la región protegida del enemigo, pero además\n  debe protegerse la región propia.\n  Los policías no pueden entrar a la zona de “House of Commons” ni los suffragetto pueden entrar en el “Albert Hall”. Asimismo, las zonas marcadas\n  como “Hospital” y “Prison” solo podrán utilizarse para almacenar las fichas inmovilizadas (los suffragetto arrestados van a prisión\n  y los policías golpeados van al hospital).\n\n");
+	printf("- MOVIMIENTOS DE LAS FICHAS:\n  1-) Movimiento simple: una de sus fichas se mueve un lugar, en cualquiera de las 8 direcciones adyacentes (vertical, horizontal y diagonales)\n      siempre que la casilla destino sea válida.\n  2-) Salto:\n      a. Una de sus fichas puede saltar sobre otra ficha (tanto enemiga como propia) para moverse un poco más lejos. Ésta puede saltar en cualquier\n         dirección (vertical, horizontal y diagonales). El salto se realiza sobre una ficha y la celda destino debe ser válida para el movimiento\n         y debe estar vacía.\n      b. Los saltos permiten inhabilitar a fichas del enemigo de la siguiente forma:\n         i.   Si un suffragetto salta en diagonal sobre un policía dentro de la “Arena”, lo inhabilita y el policía es llevado al hospital;\n         ii.  Si un líder suffragetto salta en cualquier sentido sobre un policía dentro de la “Arena”, lo inhabilita y el policía es llevado al hospital;\n         iii. Si un policía salta en diagonal sobre un suffragetto dentro de la “Arena”, lo inhabilita y el suffragetto es llevado a la prisión;\n         iv.  Si un inspector de policía salta en cualquier sentido sobre un suffragetto dentro de la “Arena”, lo inhabilita y suffragetto es llevado\n              a la prisión;\n      c. Los movimientos que se realicen fuera de la “Arena” no provocarán que los suffragetto sean arrestados o que los policías vayan al hospital.\n      d. Si tiene la posibilidad, una ficha puede hacer saltos en cadena. Se limitará la cantidad de saltos en cadena a 3.\n\n");
+	printf("Las fichas que hayan llegado al “Albert Hall” o a “House of Commons” solo podrán moverse dentro de esa área. No se permite pasar el turno.\nEl jugador que logre llevar 6 de sus fichas al área oponente, será el ganador. Esta versión de Suffragetto no permite intercambios.\n");
 
 }
 
@@ -237,6 +240,7 @@ void tablero(char tab[TAM_TAB][TAM_TAB]){
 }
 int main(void) {
 	tablero(tab);
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
+	menu(tab);
+
 	return EXIT_SUCCESS;
 }
