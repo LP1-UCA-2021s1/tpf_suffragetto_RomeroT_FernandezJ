@@ -1,0 +1,22 @@
+PARA EL MENU CUANDO SE REQUIERA JUGADOR VS JUGADOR
+
+//					scanf("%d", &resp);
+//					if(resp == 1){//se declaran los turnos dependiendo de quien empiece
+//						printf("			QUIEN EMPIEZA?\n		1 - Las Sufragistas\n		2 - Los Policias\n 		3 - Aleatorio\n");
+//						scanf("%d", &resp1);
+//						if(resp1 == 3){
+//							srand(time(NULL));
+//							alea = rand()%100;
+//							if(alea % 2 == 0){
+//								resp1 = 1;
+//							}else{
+//								resp1 = 2;
+//							}
+//						}
+//						
+//					}
+//					if(resp == 2){//en caso de ser us vs comp se declara los turnos y la seleccion de fichas del usuario
+//						
+//					}
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
