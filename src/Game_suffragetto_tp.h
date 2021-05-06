@@ -79,13 +79,25 @@ void mov_cp (char tab[TAM_TAB][TAM_TAB]);
  */
 void mov_us (char tab[TAM_TAB][TAM_TAB]);
 /*
- *
+ * una funcion que realiza los movimientos de las piezas
+ * recibe como parametros la fila, la columna y el tablero
+ * en esta funcion verifica los movimientos del jugador, segun su pieza, aquel que tiene menos movilidad
+ * al comer, en este caso las sufragistas y los policias solo comen si la posicion del contricante
+ * es en diagonal.
  */
-void mov_suf_o_pol (int * x, int * y, char tab[TAM_TAB][TAM_TAB]);
+void mov_suf_o_pol (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
 /*
- *
+ * en esta funcion se verifican los movimientos del jugador de las piezas que tienen mas movilidad al comer
+ * en el caso de las lideresas y los inspectores que pueden comer en todas las direcciones.
  */
-void mov_lid_o_ins (int * x, int * y, char tab[TAM_TAB][TAM_TAB]);
+void mov_lid_o_ins (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
+/*
+ * esta funcion determina si es valido comer una pieza
+ * recibe como parametros un auxiliar k, la fila y columna final y tb la fila y columna inicial
+ * retornara un valor para k.
+ * solo se permite comer en las posiciones columna > 4 y columna < 14
+ */
+int funcion_comer(int * k, int * columna_f, int * fila_f, int * fila_i, int * columna_i);
 /*
  * Si el usuario quiere liberar fichas en esta funcion se realiza la "negociacion"
  * si hay 12 piezas en el hospital y 12 piezas en la prision cumple con la condicion,
@@ -107,6 +119,8 @@ void cond_libertad(char tab[TAM_TAB][TAM_TAB]);
 
 /*
  * CONDICION DEL GANADOR
+ * parametros puntero ganador,
+ * retorna el valor de ganador
  * Aquel que llegue a meter 6 fichas en
  * Casa de los Comunes ----> COMMONS_HOUSE.... en este caso imprime que "LAS SUFRAGISTAS ENTRARON A LA CASA DE LOS COMUNES, LAS SUFRAGISTAS GANAN!!! :D"
  * Albert Hall ----> ALBERT_HALL.... en este caso imprime que "LOS POLICIAS INGRESARON EN EL TEATRO ALBERT HALL, LOS POLICIAS GANAN... :("

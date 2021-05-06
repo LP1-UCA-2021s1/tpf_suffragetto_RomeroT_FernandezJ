@@ -62,12 +62,10 @@ void menu(char tab[TAM_TAB][TAM_TAB]){
 						}
 						continue;
 					}
-					Modo = resp1;
-					empieza = resp2;
+					empieza = resp1;
+					Modo = resp2;
 					incio_Juego(tab);
-//					else if((resp1 == 1 || resp1 == 2) && (resp2 == 1 || resp2 == 2)){
-//
-//					}
+
 					//system("PAUSE");
 
 					break;
@@ -115,9 +113,15 @@ void reglas(void){
 
 
 void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
+
 	int val = 0, ganador = 1;
 	if(Modo == 1){//empiezan las sufragistas
 		if(empieza == 1){//el jugador es sufragista, empieza
+
+	int ganador = 1;
+	if(empieza == 1){//empiezan las sufragistas
+		if(Modo == 1){//el jugador es sufragista, empieza
+
 			do{
 				do{//verifica si la posicion es valida
 					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
@@ -159,7 +163,7 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 			}while(ganador == 1);
 		}
 	}else{//empiezan los policias
-		if(empieza == 1){//el jugador es sufragista
+		if(Modo  == 1){//el jugador es sufragista
 			do{
 				do{
 					printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
@@ -204,14 +208,63 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]){
 }
 
 void mov_cp (char tab[TAM_TAB][TAM_TAB]){
+
 	if(empieza == 1){//cuando empieza es igual a 1 significa que el usuario tiene las piezas de las sufragistas por lo tanto la computadora juega con la policia
+
+	int fila, colum, k = 0;//k
+	empieza = 2;
+	srand(time(NULL));
+	if(Modo  == 1){//cuando empieza es igual a 1 significa que el usuario tiene las piezas de las sufragistas por lo tanto la computadora juega con la policia
+		do{
+			fila = rand()%17;//busca una posicion random
+			colum = rand()%17;
+			if(colum > 1){
+				if(colum == 2){
+					if(fila > 4){
+						if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+							k = 1;
+						}
+					}
+				}
+				else{
+					if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+						k = 1;
+					}
+				}
+			}
+		}while(k == 0);
+
+
 		if(tab[fila][colum] == INSPECTORES){
 			mov_lid_o_ins (&fila, &colum, tab);
 		}if(tab[fila][colum] == POLICIAS){
 			mov_suf_o_pol (&fila, &colum, tab);
 		}
 	}
+
 	if(empieza == 2){//si la eleccion del usuario fue jugar con los policias la computadora jugara con las sufragistas
+
+	if(Modo  == 2){//si la eleccion del usuario fue jugar con los policias la computadora jugara con las sufragistas
+		do{
+			fila = rand()%16;
+			colum = rand()%16;
+			if(colum < 17){
+				if(colum == 16){
+					if(fila < 14){
+						if(tab[fila][colum] == LIDERESAS || tab[fila][colum] == SUFRAGISTAS){
+							k = 1;
+						}
+					}
+				}
+				else{
+					if(tab[fila][colum] == LIDERESAS || tab[fila][colum] == SUFRAGISTAS){
+						k = 1;
+					}
+				}
+			}
+		}while(k == 0);
+
+
 		if(tab[fila][colum] == LIDERESAS){
 			mov_lid_o_ins(&fila, &colum, tab);
 		}if(tab[fila][colum] == SUFRAGISTAS){
@@ -221,14 +274,69 @@ void mov_cp (char tab[TAM_TAB][TAM_TAB]){
 }
 
 void mov_us (char tab[TAM_TAB][TAM_TAB]){
+
 	if(empieza == 1){//eleccion del usuario jugar con las sufragistas
+
+	int val;
+	if(Modo  == 1){//eleccion del usuario jugar con las sufragistas
+		do{
+			printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
+			scanf("%d", &fila);
+			printf("Posicion de la columna (j): ");
+			scanf("%d",&colum);
+			if(colum > 1){
+				if(colum == 2){
+					if(fila > 4){
+						if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+							val = 1;
+						}
+					}
+				}
+				else{
+					if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+						val = 1;
+					}
+				}
+			}
+			else if(val == 0){
+				printf("\nSeleccion invalida.\n");
+			}
+		}while(val == 0);
+
 		if(tab[fila][colum] == LIDERESAS){
 			mov_lid_o_ins (&fila, &colum, tab);
 		}if(tab[fila][colum] == SUFRAGISTAS){
 			mov_suf_o_pol (&fila, &colum, tab);
 		}
 	}
+
 	if(empieza == 2){//eleccion del usuario jugar con los policias
+
+	if(Modo  == 2){//eleccion del usuario jugar con los policias
+		do{
+			printf("Seleccione la pieza a mover:\nPosicion de la fila (i): ");
+			scanf("%d", &fila);
+			printf("Posicion de la columna (j): ");
+			scanf("%d",&colum);
+			if(colum > 1){
+				if(colum == 2){
+					if(fila > 4){
+						if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+							val = 1;
+						}
+					}
+				}
+				else{
+					if(tab[fila][colum] == POLICIAS || tab[fila][colum] == INSPECTORES){
+						val = 1;
+					}
+				}
+			}
+			else if(val == 0){
+				printf("\nSeleccion invalida.\n");
+			}
+		}while(val == 0);
+
 		if(tab[fila][colum] == INSPECTORES){
 			mov_lid_o_ins(&fila, &colum, tab);
 		}if(tab[fila][colum] == POLICIAS){
@@ -237,8 +345,9 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]){
 	}
 }
 
-void mov_suf_o_pol (int * x, int * y, char tab[TAM_TAB][TAM_TAB]){
-	int a,b,aux1;
+
+void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]]){
+	int a,b,aux1,x=*fila, y=*colum;
 
 	if(Modo==1){// es el turno de los sufragistas
 		do{
@@ -253,7 +362,7 @@ void mov_suf_o_pol (int * x, int * y, char tab[TAM_TAB][TAM_TAB]){
 			}
 			else{
 				//(pow((*x-a),2) == 0 || pow((*x-a),2) == 1) && (pow((*y-b),2) == 0 || pow((*y-b),2) == 1)
-				if((fabs(*x-a) == 0 || fabs(*x-a) == 1) && (fabs(*y-b) == 0 || fabs(*y-b) == 1)){
+				if((fabs(x-a) == 0 || fabs(x-a) == 1) && (fabs(y-b) == 0 || fabs(y-b) == 1)){
 					if(tab[a][b]==SUFRAGISTAS || tab[a][b]==LIDERESAS || tab[a][b]==POLICIAS|| tab[a][b]==INSPECTORES ){
 						printf("MOVIMIENTO INVALIDO, vuelva a ingresar");
 						aux1 = 1;
@@ -265,7 +374,7 @@ void mov_suf_o_pol (int * x, int * y, char tab[TAM_TAB][TAM_TAB]){
 							}
 							else{
 								tab[a][b]=SUFRAGISTAS;
-								tab[*x][*y]= THE_ARENA;
+								tab[x][y]= THE_ARENA;
 							}
 						}
 					}
@@ -279,17 +388,100 @@ void mov_suf_o_pol (int * x, int * y, char tab[TAM_TAB][TAM_TAB]){
 
 
 	}
-
-
-
-
+	printf("\n HASTA AQUI LLEGUE!! mov_suf_o_pol\n");
 }
 
+
+
+int funcion_comer(int * k, int * columna_f, int * fila_f, int * fila_i, int * columna_i){
+
+	return 0;
+}
+
+
+
 void mov_lid_o_ins (int * x, int * y, char tab[TAM_TAB][TAM_TAB]){
+
+	printf("\n HASTA AQUI LLEGUE!! mov_lid_o_ins\n");
+	int fila_i = *fila, columna_i = *colum, k = 0, fila_f, columna_f, aux1, aux2;
+	do{
+		printf("Introduzca la fila donde quiere mover: ");
+		scanf("%d", &fila_f);
+		printf("Introduzca la columna donde quiere mover: ");
+		scanf("%d", &columna_f);
+		aux1 = fila_f - fila_i;
+		scanf("%u", &aux1);
+		aux2 = columna_f - columna_i;
+		scanf("%u", &aux2);
+		if((aux1 == 2 && aux2 ==1) || (aux1 == 1 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
+
+		}else if(aux1 == 1 && aux2 == 1){
+			k = 2;
+		}else{
+			printf("\nJugada invalida!!!\n");
+			k = 0;
+		}
+	}while(k == 0);
+
 
 }
 
 void liberacion(char tab[TAM_TAB][TAM_TAB]){
+
+
+
+	int i, j, contador = 0, contador1 = 0, p = 12, s = 1;
+	for(i = 0; i < TAM_TAB; i++){
+		for(j = 0; j < TAM_TAB; j++){
+			if(j == 1){
+				if(tab[i][j] == POLICIAS && contador < 6){//busca policias en la zona del hospital
+					tab[i][j] = HOSPITAL;
+					tab[p++][2] = POLICIAS;//los envia a los jardines
+					contador++;
+				}
+				if(tab[i][j] == INSPECTORES && contador < 6){
+					tab[i][j] = HOSPITAL;
+					tab[p++][2] = INSPECTORES;
+					contador++;
+				}
+			}
+			if((j == 2) && (0 < i && i < 5)){
+				if(tab[i][j] == POLICIAS && contador < 6){
+					tab[i][j] = HOSPITAL;
+					tab[p++][2] = POLICIAS;
+					contador++;
+				}
+				if(tab[i][j] == INSPECTORES && contador < 6){
+					tab[i][j] = HOSPITAL;
+					tab[p++][2] = INSPECTORES;
+					contador++;
+				}
+			}
+			if(j == 17){
+				if(tab[i][j] == SUFRAGISTAS && contador1 < 6){//busca sufragistas en la prision
+					tab[i][j] = PRISON;
+					tab[s++][2] = SUFRAGISTAS;//envia la ficha a la posicion donde hay Y
+					contador1++;
+				}
+				if(tab[i][j] == LIDERESAS && contador1 < 6){
+					tab[i][j] = PRISON;
+					tab[s++][2] = LIDERESAS;
+					contador1++;
+				}
+			}if(j == 16 && (i > 13 && i < 18)){
+				if(tab[i][j] == SUFRAGISTAS && contador1 < 6){//busca sufragistas en la prision
+					tab[i][j] = PRISON;
+					tab[s++][2] = SUFRAGISTAS;
+					contador1++;
+				}
+				if(tab[i][j] == LIDERESAS && contador1 < 6){
+					tab[i][j] = PRISON;
+					tab[s++][2] = LIDERESAS;
+					contador1++;
+				}
+			}
+		}
+	}
 
 }
 
@@ -324,7 +516,7 @@ void cond_libertad(char tab[TAM_TAB][TAM_TAB]){
 		scanf("%d", &x);
 		switch(x){
 		case 1:
-			printf("Negociando Liberacion de piezas, podra sacarlas en el sgte turno.\n");
+			printf("Negociando liberacion de piezas, podra sacarlas en el sgte turno.\n");
 			liberacion(tab);
 			break;
 		default:
@@ -505,13 +697,32 @@ void inicializar_tablero(char tab[TAM_TAB][TAM_TAB]){
 
 void tablero(char tab[TAM_TAB][TAM_TAB]){
 	int i, j;
+
 	printf("\n --+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
 	for(i = 0; i < TAM_TAB; i++){
 		for(j = 0; j < TAM_TAB; j++){
 
+	printf("\n+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+\n");
+	for(i = 0; i < TAM_TAB; i++){
+		for(j = 0; j < TAM_TAB; j++){
+			if(i == 0 && j > -1){
+				if(j == 0){
+					printf("| %2d |", j);
+				}else{
+					printf(" %2d |", j);
+				}
+			}
+			else if(j == 0 && i > 0){
+				printf("| %2d |", i);
+			}
+
 			printf(" %c |", tab[i][j]);
 		}
+
 		printf("\n --+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
+
+		printf("\n+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+\n");
+
 	}
 }
 
