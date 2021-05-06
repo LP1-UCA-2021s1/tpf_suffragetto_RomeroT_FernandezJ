@@ -1177,7 +1177,7 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 												if(a>x && b==y){
 													if (tab[a - 1][b] == SUFRAGISTAS|| tab[a - 1][b]== LIDERESAS|| tab[a - 1][b]== POLICIAS|| tab[a - 1][b]== INSPECTORES) {
 														if ((x >= 1 && x <= 17)&& (y >= 5 && y <= 13)) {
-															if (((x == 4 || x == 5)&& (y >= 8&& y<= 10))|| ((x == 14|| x== 13)&& (y>= 8 && y<= 10))) {
+															if (((x == 4 || x == 5)&& (y >= 8 && y<= 10))|| ((x == 14|| x== 13)&& (y>= 8 && y<= 10))) {
 
 
 
