@@ -100,7 +100,14 @@ void mov_ins_o_pol (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
  * en esta funcion se verifican los movimientos del jugador de las piezas que tienen mas movilidad al comer
  * en el caso de las lideresas y los inspectores que pueden comer en todas las direcciones.
  */
+void mov_lid_o_ins (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
+
+void piezas_comidas_sl(int *fil, int *col, char tab[TAM_TAB][TAM_TAB]);
+
+void piezas_comidas_pi(int *fil, int *col, char tab[TAM_TAB][TAM_TAB]);
+
 void mov_lid_o_suf (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
+void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]);
 /*
  * esta funcion determina si es valido comer una pieza
  * recibe como parametros un auxiliar k, la fila y columna final y tb la fila y columna inicial
@@ -108,6 +115,7 @@ void mov_lid_o_suf (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
  * solo se permite comer en las posiciones columna > 4 y columna < 14
  */
 void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_i, int columna_i);
+void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f, int fila_i, int columna_i);
 /*
  * Si el usuario quiere liberar fichas en esta funcion se realiza la "negociacion"
  * si hay 12 piezas en el hospital y 12 piezas en la prision cumple con la condicion,
