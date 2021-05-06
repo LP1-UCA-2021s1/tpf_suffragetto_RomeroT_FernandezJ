@@ -238,7 +238,8 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]){
 		if(tab[fila][colum] == LIDERESAS){
 			mov_lid_o_suf(&fila, &colum, tab);
 		}if(tab[fila][colum] == SUFRAGISTAS){
-			mov_suf_o_pol (&fila, &colum, tab);
+			//mov_suf_o_pol (&fila, &colum, tab);
+			printf("no one");
 		}
 	}
 
@@ -268,9 +269,11 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]){
 		}while(val == 0);
 
 		if(tab[fila][colum] == INSPECTORES){
-			mov_suf_o_pol(&fila, &colum, tab);
+			//mov_suf_o_pol(&fila, &colum, tab);
+			printf("no one");
 		}if(tab[fila][colum] == POLICIAS){
-			mov_suf_o_pol (&fila, &colum, tab);
+			printf("no one");
+//			mov_suf_o_pol (&fila, &colum, tab);
 		}
 	}
 }
@@ -1095,94 +1098,78 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 	printf("\nfila au = %d, colum au = %d\n", aux1, aux2);
 }
 
-<<<<<<< HEAD
-void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
-	int a,b,aux1,x=*fila, y=*colum;
-
-	if(Modo==1){// es el turno de los sufragistas
-=======
-
 void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 	int a,b,aux1,x=5, y=13, aux2;
->>>>>>> 6072a1d63a88a457bf7ac0562c5426740dd646c2
-		do{
-			aux2=0;// variable para controlar la carga de datos
-			if (tab[x][y] == SUFRAGISTAS) { // es el turno de los sufragistas
-				aux2=1;// variable para controlar la carga de datos
-				do {
+	do{
+		aux2=0;// variable para controlar la carga de datos
+		if (tab[x][y] == SUFRAGISTAS) { // es el turno de los sufragistas
+			aux2=1;// variable para controlar la carga de datos
+			do {
+				aux1 = 0;
+				printf("Ingrese la coordenas de la fila, a donde desea mover la fichas:\n");
+				scanf("%d", &a);
+				printf("Ingrese la coordenas de la columna, a donde desea mover la fichas:\n");
+				scanf("%d", &b);
+				if (tab[a][b] == COMMONS_HOUSE || tab[a][b] == HOSPITAL || tab[a][b] == PRISON) {
+					printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 					aux1 = 0;
-					printf("Ingrese la coordenas de la fila, a donde desea mover la fichas:\n");
-					scanf("%d", &a);
-					printf("Ingrese la coordenas de la columna, a donde desea mover la fichas:\n");
-					scanf("%d", &b);
-					if (tab[a][b] == COMMONS_HOUSE || tab[a][b] == HOSPITAL || tab[a][b] == PRISON) {
-						printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
-						aux1 = 0;
-					} else {
+				} else {
+					if ((fabs(x - a) == 0 || fabs(x - a) == 1)&& (fabs(y - b) == 0 || fabs(y - b) == 1)) { // para moverse en posiciones adyacentes, restamos las posiciones y nos da 1 y 0
+						if (tab[a][b] == SUFRAGISTAS || tab[a][b] == LIDERESAS || tab[a][b] == POLICIAS || tab[a][b] == INSPECTORES) {// si la posicion a donde queremos movernos esta libre
+							printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
+							aux1 = 0;
+						} else { // condciones con rangos de de cada arena, para la actualizacion del tablero
+							if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
+								if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y <= 10))) {
 
-
-
-						if ((fabs(x - a) == 0 || fabs(x - a) == 1)&& (fabs(y - b) == 0 || fabs(y - b) == 1)) { // para moverse en posiciones adyacentes, restamos las posiciones y nos da 1 y 0
-							if (tab[a][b] == SUFRAGISTAS || tab[a][b] == LIDERESAS || tab[a][b] == POLICIAS || tab[a][b] == INSPECTORES) {// si la posicion a donde queremos movernos esta libre
-								printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
-								aux1 = 0;
-							} else { // condciones con rangos de de cada arena, para la actualizacion del tablero
-								if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
-									if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y <= 10))) {
-
-									} else {
-										tab[a][b] = POLICIAS;
-										tab[x][y] = THE_ARENA;
-										aux1 = 1;
-									}
 								} else {
-									if ((x >= 12 && x <= 17) && y == 2) {
-										tab[x][y] = HOSPITAL_GROUNDS;
+									tab[a][b] = POLICIAS;
+									tab[x][y] = THE_ARENA;
+									aux1 = 1;
+								}
+							} else {
+								if ((x >= 12 && x <= 17) && y == 2) {
+									tab[x][y] = HOSPITAL_GROUNDS;
+									tab[a][b] = POLICIAS;
+									aux1 = 1;
+								} else {
+									if ((x >= 1 && x <= 6) && y == 16) {
 										tab[a][b] = POLICIAS;
+										tab[x][y] = PRISON_YARD;
 										aux1 = 1;
-
 									} else {
-										if ((x >= 1 && x <= 6) && y == 16) {
-											tab[a][b] = POLICIAS;
-											tab[x][y] = PRISON_YARD;
-											aux1 = 1;
-
+										if ((x == 1 && (y >= 1 && y <= 17)) || (y == 1 && (x >= 1 && x <= 17))) {
+											printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 										} else {
-											if ((x == 1 && (y >= 1 && y <= 17)) || (y == 1 && (x >= 1 && x <= 17))) {
-												printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
-
-											} else {
-												tab[a][b] = POLICIAS;
-												tab[x][y] = ' ';
-												aux1 = 1;
-
-											}
+											tab[a][b] = POLICIAS;
+											tab[x][y] = ' ';
+											aux1 = 1;
 										}
 									}
 								}
 							}
+						}
+					}else{
+						if((fabs(x - a) == 0 || fabs(x - a) == 2)&& (fabs(y - b) == 0 || fabs(y - b) == 2)){ // condicion para salto es la direccion perpendicular y horizontal
+							if (tab[a][b] == SUFRAGISTAS || tab[a][b] == LIDERESAS || tab[a][b] == POLICIAS || tab[a][b] == INSPECTORES) {
+								printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
+								aux1 = 0;
+							} else{
+								if (x == a && x < b) { // condicion para actualizacion del tablero en el costado derecho
+									if (tab[a][b - 1] == SUFRAGISTAS || tab[a][b - 1] == LIDERESAS || tab[a][b - 1] == POLICIAS || tab[a][b - 1] == INSPECTORES) {
+										if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
+											if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y <= 10))) {
 
-						}else{
-							if((fabs(x - a) == 0 || fabs(x - a) == 2)&& (fabs(y - b) == 0 || fabs(y - b) == 2)){ // condicion para salto es la direccion perpendicular y horizontal
-								if (tab[a][b] == SUFRAGISTAS || tab[a][b] == LIDERESAS || tab[a][b] == POLICIAS || tab[a][b] == INSPECTORES) {
-									printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
-									aux1 = 0;
-								} else{
-									if (x == a && x < b) { // condicion para actualizacion del tablero en el costado derecho
-										if (tab[a][b - 1] == SUFRAGISTAS || tab[a][b - 1] == LIDERESAS || tab[a][b - 1] == POLICIAS || tab[a][b - 1] == INSPECTORES) {
-											if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
-												if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y <= 10))) {
-
-												} else {
-													tab[a][b] = POLICIAS;
-													tab[x][y] = THE_ARENA;
-													aux1 = 1;
-												}
 											} else {
-												if ((x >= 12 && x <= 17)
-														&& y == 2) {
-													tab[x][y] = HOSPITAL_GROUNDS;
-													tab[a][b] = POLICIAS;
+												tab[a][b] = POLICIAS;
+												tab[x][y] = THE_ARENA;
+												aux1 = 1;
+											}
+										} else {
+											if ((x >= 12 && x <= 17)
+													&& y == 2) {
+												tab[x][y] = HOSPITAL_GROUNDS;
+												tab[a][b] = POLICIAS;
 													aux1 = 1;
 
 												} else {
