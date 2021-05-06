@@ -1095,19 +1095,13 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 	printf("\nfila au = %d, colum au = %d\n", aux1, aux2);
 }
 
-<<<<<<< HEAD
-void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
-	int a,b,aux1,x=*fila, y=*colum;
-
-	if(Modo==1){// es el turno de los sufragistas
-=======
 
 void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
-	int a,b,aux1,x=5, y=13, aux2;
->>>>>>> 6072a1d63a88a457bf7ac0562c5426740dd646c2
+	int a,b,aux1,x=*fila, y=*colum, aux2;// las variables aux, son para el control, de posiciones correctas, ingresadas por el usuario
+
 		do{
 			aux2=0;// variable para controlar la carga de datos
-			if (tab[x][y] == SUFRAGISTAS) { // es el turno de los sufragistas
+			if (tab[x][y] == POLICIAS) { // es el turno de los sPOLICIAS
 				aux2=1;// variable para controlar la carga de datos
 				do {
 					aux1 = 0;
@@ -1115,18 +1109,18 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 					scanf("%d", &a);
 					printf("Ingrese la coordenas de la columna, a donde desea mover la fichas:\n");
 					scanf("%d", &b);
-					if (tab[a][b] == COMMONS_HOUSE || tab[a][b] == HOSPITAL || tab[a][b] == PRISON) {
+					if (tab[a][b] == COMMONS_HOUSE || tab[a][b] == HOSPITAL || tab[a][b] == PRISON) {//no puede ingresar a estos lugares, de parte de una jugada directa del jugador
 						printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 						aux1 = 0;
 					} else {
 
 
 
-						if ((fabs(x - a) == 0 || fabs(x - a) == 1)&& (fabs(y - b) == 0 || fabs(y - b) == 1)) { // para moverse en posiciones adyacentes, restamos las posiciones y nos da 1 y 0
+						if ((fabs(x - a) == 0 || fabs(x - a) == 1)&& (fabs(y - b) == 0 || fabs(y - b) == 1)) { // para moverse en posiciones adyacentes las 8 que rodean a acualquier ficha, restamos las posiciones y nos da 1 y 0
 							if (tab[a][b] == SUFRAGISTAS || tab[a][b] == LIDERESAS || tab[a][b] == POLICIAS || tab[a][b] == INSPECTORES) {// si la posicion a donde queremos movernos esta libre
 								printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 								aux1 = 0;
-							} else { // condciones con rangos de de cada arena, para la actualizacion del tablero
+							} else { // condiciones con rangos que alcanzan cada area del tablero, para la actualizacion del tablero, la posicion anterior de la ficha
 								if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
 									if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y <= 10))) {
 
@@ -1168,7 +1162,7 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 									printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 									aux1 = 0;
 								} else{
-									if (x == a && x < b) { // condicion para actualizacion del tablero en el costado derecho
+									if (x == a && x < b) { // condicion para salto a una ficha en el costado  derecho
 										if (tab[a][b - 1] == SUFRAGISTAS || tab[a][b - 1] == LIDERESAS || tab[a][b - 1] == POLICIAS || tab[a][b - 1] == INSPECTORES) {
 											if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
 												if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y <= 10))) {
@@ -1209,7 +1203,7 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 
 										}
 									}else{
-										if(x == a && x > b){// condicion para actualizacion del tablero en el costado izquierdo
+										if(x == a && x > b){// condicion para salto a una ficha en el costado izquierdo
 											if (tab[a][b+1] == SUFRAGISTAS || tab[a][b + 1] == LIDERESAS || tab[a][b + 1] == POLICIAS || tab[a][b + 1] == INSPECTORES) {//condicion para ubicar la pieza a saltar
 												if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
 													if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y<= 10))) {
@@ -1249,7 +1243,7 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 
 
 										}else{
-											if(a<x && b==y){//condcion para saltar en la casilla superior a la filla
+											if(a<x && b==y){//condcion para saltar encima de una ficha, en la casilla superior a la ficha
 												if (tab[a+1][b] == SUFRAGISTAS || tab[a+1][b]== LIDERESAS || tab[a+1][b] == POLICIAS || tab[a+1][b] == INSPECTORES) {
 													if ((x >= 1 && x <= 17)&& (y >= 5 && y <= 13)) {
 														if (((x == 4 || x == 5)&& (y >= 8&& y <= 10))|| ((x == 14|| x == 13)&& (y >= 8&& y<= 10))) {
@@ -1294,7 +1288,7 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 
 												}
 
-											}else{//condcion para saltar en la casilla superior a la filla
+											}else{//condcion para saltar encima de una ficha, en la casilla inferior a la ficha
 												if(a>x && b==y){
 													if (tab[a - 1][b] == SUFRAGISTAS|| tab[a - 1][b]== LIDERESAS|| tab[a - 1][b]== POLICIAS|| tab[a - 1][b]== INSPECTORES) {
 														if ((x >= 1 && x <= 17)&& (y >= 5 && y <= 13)) {
@@ -1381,7 +1375,7 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 					aux2=1; // variable para controlar la carga de datos
 					do{
 
-						aux1 = 0;
+						aux1 = 0; //variable para controlar la carga de datos
 						printf("Ingrese la coordenas de la fila, a donde desea mover la fichas:\n");
 						scanf("%d", &a);
 						printf("Ingrese la coordenas de la columna, a donde desea mover la fichas:\n");
@@ -1397,7 +1391,7 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 									printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 
 									aux1 = 0;
-								} else { // condciones con rangos de de cada arena, para la actualizacion del tablero
+								} else { // condciones con rangos de cada area del tablero, para la actualizacion de la posicion anterior de la ficha en el tablero
 									if ((x >= 1 && x <= 17)&& (y >= 5 && y <= 13)) {
 
 										if (((x == 4 || x == 5)&& (y >= 8 && y <= 10))|| ((x == 14 || x == 13)&& (y >= 8 && y <= 10))) {
@@ -1459,7 +1453,7 @@ void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 }
 
 void  mov_lid_o_suf (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
-	int a,b,aux1,x=*fila, y=*colum, aux2;
+	int a,b,aux1,x=*fila, y=*colum, aux2;//las variables aux son para el control de ingreso de posiciones correctas
 		do{
 			aux2=0;// variable para controlar la carga de datos
 			if (tab[x][y] == SUFRAGISTAS) { // es el turno de los sufragistas
@@ -1480,7 +1474,7 @@ void  mov_lid_o_suf (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 							if (tab[a][b] == SUFRAGISTAS || tab[a][b] == LIDERESAS || tab[a][b] == POLICIAS || tab[a][b] == INSPECTORES) {// si la posicion a donde queremos movernos esta libre
 								printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 								aux1 = 0;
-							} else { // condciones con rangos de de cada arena, para la actualizacion del tablero
+							} else { //condciones con rangos de cada area del tablero, para la actualizacion de la posicion anterior de la ficha en el tablero
 								if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
 									if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y <= 10))) {
 
@@ -1522,7 +1516,7 @@ void  mov_lid_o_suf (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 									printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 									aux1 = 0;
 								} else{
-									if (x == a && x < b) { // condicion para actualizacion del tablero en el costado derecho
+									if (x == a && x < b) { // condicion para actualizacion de la posicion anterior de la ficha en el tablero en el costado derecho
 										if (tab[a][b - 1] == SUFRAGISTAS || tab[a][b - 1] == LIDERESAS || tab[a][b - 1] == POLICIAS || tab[a][b - 1] == INSPECTORES) {
 											if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
 												if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y <= 10))) {
@@ -1563,7 +1557,7 @@ void  mov_lid_o_suf (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 
 										}
 									}else{
-										if(x == a && x > b){// condicion para actualizacion del tablero en el costado izquierdo
+										if(x == a && x > b){//  condicion para actualizacion de la posicion anterior de la ficha en el tablero en el costado izquierdo
 											if (tab[a][b+1] == SUFRAGISTAS || tab[a][b + 1] == LIDERESAS || tab[a][b + 1] == POLICIAS || tab[a][b + 1] == INSPECTORES) {//condicion para ubicar la pieza a saltar
 												if ((x >= 1 && x <= 17) && (y >= 5 && y <= 13)) {
 													if (((x == 4 || x == 5) && (y >= 8 && y <= 10)) || ((x == 14 || x == 13) && (y >= 8 && y<= 10))) {
@@ -1603,7 +1597,7 @@ void  mov_lid_o_suf (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 
 
 										}else{
-											if(a<x && b==y){//condcion para saltar en la casilla superior a la filla
+											if(a<x && b==y){//condcion para el salto a una ficha en la casilla superior a la ficha
 												if (tab[a+1][b] == SUFRAGISTAS || tab[a+1][b]== LIDERESAS || tab[a+1][b] == POLICIAS || tab[a+1][b] == INSPECTORES) {
 													if ((x >= 1 && x <= 17)&& (y >= 5 && y <= 13)) {
 														if (((x == 4 || x == 5)&& (y >= 8&& y <= 10))|| ((x == 14|| x == 13)&& (y >= 8&& y<= 10))) {
@@ -1648,7 +1642,7 @@ void  mov_lid_o_suf (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 
 												}
 
-											}else{//condcion para saltar en la casilla superior a la filla
+											}else{//condcion para el salto a una ficha en la casilla inferior a la ficha
 												if(a>x && b==y){
 													if (tab[a - 1][b] == SUFRAGISTAS|| tab[a - 1][b]== LIDERESAS|| tab[a - 1][b]== POLICIAS|| tab[a - 1][b]== INSPECTORES) {
 														if ((x >= 1 && x <= 17)&& (y >= 5 && y <= 13)) {
@@ -1751,7 +1745,7 @@ void  mov_lid_o_suf (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 									printf("MOVIMIENTO INVALIDO, vuelva a ingresar\n");
 
 									aux1 = 0;
-								} else { // condciones con rangos de de cada arena, para la actualizacion del tablero
+								} else { // condiciones con rangos de cada ara del tablero, para la actualizacion de la posicion anterior de la ficha en el tablero
 									if ((x >= 1 && x <= 17)&& (y >= 5 && y <= 13)) {
 
 										if (((x == 4 || x == 5)&& (y >= 8 && y <= 10))|| ((x == 14 || x == 13)&& (y >= 8 && y <= 10))) {
