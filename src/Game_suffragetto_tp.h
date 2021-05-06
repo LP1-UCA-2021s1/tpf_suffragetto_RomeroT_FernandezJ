@@ -70,7 +70,16 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]);
  * La logica de la computadora sera de movimientos randoms
  */
 void mov_cp (char tab[TAM_TAB][TAM_TAB]);
-void mov_cp_pol (int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
+/*
+ * funcion que verifica los movimientos de la computadora cuando le toca jugar con las piezas de los policias
+ * tiene como parmetros la fila y columna inicial
+ * retorna una nueva posicion en el tablero
+ */
+void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
+/*
+ * cuando a la computadora le toca jugar con las piezas de las sufragistas
+ */
+void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
 /*
  * MOVIMIENTO DEL USUARIO
  * segun las reglas puede mover una ficha y avanzar una casilla en cualquier direccion por turno
@@ -98,7 +107,7 @@ void mov_lid_o_ins (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
  * retornara un valor para k.
  * solo se permite comer en las posiciones columna > 4 y columna < 14
  */
-void funcion_comer(int * k, int columna_f, int fila_f, int fila_i, int columna_i);
+void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_i, int columna_i);
 /*
  * Si el usuario quiere liberar fichas en esta funcion se realiza la "negociacion"
  * si hay 12 piezas en el hospital y 12 piezas en la prision cumple con la condicion,
