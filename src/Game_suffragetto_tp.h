@@ -95,19 +95,21 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]);
  * al comer, en este caso las sufragistas y los policias solo comen si la posicion del contricante
  * es en diagonal.
  */
-void mov_ins_o_pol (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
+void mov_lid_o_ins (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]);
 /*
  * en esta funcion se verifican los movimientos del jugador de las piezas que tienen mas movilidad al comer
  * en el caso de las lideresas y los inspectores que pueden comer en todas las direcciones.
  */
-void mov_lid_o_ins (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
-
+void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]);
+/*
+ * funcion que lleva a las piezas comidas al hospital o a la prision
+ * parametros la fila y columna donde estaba la pieza comida
+ * retorna los cambios en el tablero
+ */
 void piezas_comidas_sl(int *fil, int *col, char tab[TAM_TAB][TAM_TAB]);
 
 void piezas_comidas_pi(int *fil, int *col, char tab[TAM_TAB][TAM_TAB]);
 
-void mov_lid_o_suf (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
-void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]);
 /*
  * esta funcion determina si es valido comer una pieza
  * recibe como parametros un auxiliar k, la fila y columna final y tb la fila y columna inicial
