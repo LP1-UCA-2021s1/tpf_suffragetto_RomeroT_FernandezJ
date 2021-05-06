@@ -160,7 +160,7 @@ void mov_cp (char tab[TAM_TAB][TAM_TAB]){
 	srand(time(NULL));
 	if(Modo  == 1){//cuando empieza es igual a 1 significa que el usuario tiene las piezas de las sufragistas por lo tanto la computadora juega con la policia
 		do{
-			fila = rand()%16;//busca una posicion random
+			fila = rand()%17;//busca una posicion random
 			colum = rand()%16;
 			if(colum > 1){
 				if(colum == 2){
@@ -274,10 +274,11 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]){
 		}
 	}
 }
+
 void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f, int fila_i, int columna_i){
 	int n, n1;
-	n = fila_f - fila_i;
-	n1 = columna_f - fila_f;
+	n = fila_f - fila_i;//auxiliar que identifica el sentido en el que se quiere mover en las filas
+	n1 = columna_f - fila_f;//auxiliar que identifica el sentido en el que se quiere mover en las columnas
 
 	if(tab[fila_i][columna_i] == INSPECTORES){
 		//diagonales
@@ -342,7 +343,7 @@ void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f,
 				}
 			}
 		}
-		else if(n == -2 && n == 2){
+		else if(n == -2 && n1 == 2){
 			if((fila_i - 1 == 13 && columna_i + 1 == 8) || (fila_i - 1 == 14 && columna_i + 1 == 10)){
 				*k = 0;
 			}else{
@@ -364,7 +365,7 @@ void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f,
 			}
 		}
 		//vertical y horizontal
-		else if(n == 0 && n == 2){
+		else if(n == 0 && n1 == 2){
 			if(tab[fila_i][columna_i + 1] == LIDERESAS || tab[fila_i][columna_i + 1] == SUFRAGISTAS){
 				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
 					*k = 1;//jugada valida
@@ -380,7 +381,7 @@ void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f,
 				*y = 1;
 			}
 		}
-		else if(n == 2 && n == 0){
+		else if(n == 2 && n1 == 0){
 			if(tab[fila_i+1][columna_i] == LIDERESAS || tab[fila_i+1][columna_i] == SUFRAGISTAS){
 				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
 					*k = 1;//jugada valida
@@ -397,7 +398,7 @@ void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f,
 				*y = 0;
 			}
 		}
-		else if(n == 0 && n == -2){
+		else if(n == 0 && n1 == -2){
 			if(tab[fila_i][columna_i - 1] == LIDERESAS || tab[fila_i][columna_i - 1] == SUFRAGISTAS){
 				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
 					*k = 1;//jugada valida
@@ -413,7 +414,7 @@ void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f,
 				*y = -1;
 			}
 		}
-		else if(n == -2 && n == 0){
+		else if(n == -2 && n1 == 0){
 			if(tab[fila_i-1][columna_i] == LIDERESAS || tab[fila_i-1][columna_i] == SUFRAGISTAS){
 				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
 					*k = 1;//jugada valida
@@ -494,7 +495,7 @@ void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f,
 			}
 
 		}
-		else if(n == -2 && n == 2){
+		else if(n == -2 && n1 == 2){
 			if((fila_i - 1 == 13 && columna_i + 1 == 8) || (fila_i - 1 == 14 && columna_i + 1 == 10)){
 				*k = 0;
 			}else{
@@ -515,7 +516,39 @@ void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f,
 				}
 			}
 		}else{//si no es un salto diagonal entonces es uno horizontal o vertical
-			*k = 2;
+			if(n == -2 && n1 == 0){
+				if(tab[fila_i - 1][columna_i] == INSPECTORES || tab[fila_i - 1][columna_i] == POLICIAS){
+					*k = 2;
+					*x = -1;
+					*y = 0;
+				}
+			}
+			else if(n == 2 && n1 == 0){
+				if(tab[fila_i + 1][columna_i] == INSPECTORES || tab[fila_i + 1][columna_i] == POLICIAS){
+					*k = 2;
+					*x = 1;
+					*y = 0;
+				}
+			}
+			else if(n == 0 && n1 == -2){
+				if(tab[fila_i][columna_i - 1] == INSPECTORES || tab[fila_i][columna_i - 1] == POLICIAS){
+					*k = 2;
+					*x = 0;
+					*y = -1;
+				}
+				else{
+					*k = 0;
+				}
+			}else if(n == 0 && n1 == 2){
+				if(tab[fila_i][columna_i + 1] == INSPECTORES || tab[fila_i][columna_i + 1] == POLICIAS){
+					*k = 2;
+					*x = 0;
+					*y = 1;
+				}
+				else{
+					*k = 0;
+				}
+			}
 		}
 	}
 }
@@ -573,12 +606,14 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 					}
 					else{
 						*k = 0;
-
 					}
 				}else if(tab[fila_i + 1][columna_i + 1] == LIDERESAS || tab[fila_i + 1][columna_i + 1] == SUFRAGISTAS){
 					*k = 2;
 					*x = 1;
 					*y = 1;
+				}
+				else{
+					*k = 0;
 				}
 			}
 		}
@@ -600,6 +635,9 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 					*x = -1;
 					*y = -1;
 				}
+				else{
+					*k = 0;
+				}
 			}
 		}
 		else if(n == 2 && n1 == -2){
@@ -619,10 +657,12 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 					*k = 2;
 					*x = 1;
 					*y = -1;
+				}else{
+					*k = 0;
 				}
 			}
 		}
-		else if(n == -2 && n == 2){
+		else if(n == -2 && n1 == 2){
 			if((fila_i - 1 == 4 && columna_i + 1 == 8) || (fila_i - 1 == 5 && columna_i + 1 == 10)){
 				*k = 0;//jugada invalida
 			}else{
@@ -640,9 +680,12 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 					*x = -1;
 					*y = 1;
 				}
+				else{
+					*k = 0;
+				}
 			}
 		}//vertical y horizontal
-		else if(n == 0 && n == 2){
+		else if(n == 0 && n1 == 2){
 			if(tab[fila_i][columna_i + 1] == INSPECTORES || tab[fila_i][columna_i + 1] == POLICIAS){
 				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
 					*k = 1;//jugada valida
@@ -657,8 +700,11 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 				*x = 0;
 				*y = 1;
 			}
+			else{
+				*k = 0;
+			}
 		}
-		else if(n == 2 && n == 0){
+		else if(n == 2 && n1 == 0){
 			if(tab[fila_i+1][columna_i] == INSPECTORES || tab[fila_i+1][columna_i] == POLICIAS){
 				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
 					*k = 1;//jugada valida
@@ -673,8 +719,11 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 				*x = 1;
 				*y = 0;
 			}
+			else{
+				*k = 0;
+			}
 		}
-		else if(n == 0 && n == -2){
+		else if(n == 0 && n1 == -2){
 			if(tab[fila_i][columna_i - 1] == INSPECTORES || tab[fila_i][columna_i - 1] == POLICIAS){
 				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
 					*k = 1;//jugada valida
@@ -689,8 +738,11 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 				*x = 0;
 				*y = -1;
 			}
+			else{
+				*k = 0;
+			}
 		}
-		else if(n == -2 && n == 0){
+		else if(n == -2 && n1 == 0){
 			if(tab[fila_i-1][columna_i] == INSPECTORES || tab[fila_i-1][columna_i] == POLICIAS){
 				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
 					*k = 1;//jugada valida
@@ -704,6 +756,9 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 				*k = 2;
 				*x = -1;
 				*y = 0;
+			}
+			else{
+				*k = 0;
 			}
 		}
 	}
@@ -726,6 +781,9 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 					*x = 1;
 					*y = 1;
 				}
+				else{
+					*k = 0;
+				}
 			}
 		}
 		else if(n == -2 && n1 == -2){
@@ -746,6 +804,9 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 					*k = 2;
 					*x = -1;
 					*y = -1;
+				}
+				else{
+					*k = 0;
 				}
 			}
 		}
@@ -768,9 +829,12 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 					*x = 1;
 					*y = -1;
 				}
+				else{
+					*k = 0;
+				}
 			}
 		}
-		else if(n == -2 && n == 2){
+		else if(n == -2 && n1 == 2){
 			if((fila_i - 1 == 4 && columna_i + 1 == 8) || (fila_i - 1 == 5 && columna_i + 1 == 10)){
 				*k = 0;//jugada invalida
 			}else{
@@ -786,14 +850,49 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 					*k = 2;
 					*x = -1;
 					*y = 1;
+				}else{
+					*k = 0;
 				}
 			}
 		}
 		else{//si no es un salto diagonal entonces es uno horizontal o vertical
-			*k = 2;
+			if(n == -2 && n1 == 0){
+				if(tab[fila_i - 1][columna_i] == LIDERESAS || tab[fila_i - 1][columna_i] == SUFRAGISTAS){
+					*k = 2;
+					*x = -1;
+					*y = 0;
+				}
+			}
+			if(n == 2 && n1 == 0){
+				if(tab[fila_i + 1][columna_i] == LIDERESAS || tab[fila_i + 1][columna_i] == SUFRAGISTAS){
+					*k = 2;
+					*x = 1;
+					*y = 0;
+				}
+			}
+			if(n == 0 && n1 == -2){
+				if(tab[fila_i][columna_i - 1] == LIDERESAS || tab[fila_i][columna_i - 1] == SUFRAGISTAS){
+					*k = 2;
+					*x = 0;
+					*y = -1;
+				}
+				else{
+					*k = 0;
+				}
+			}if(n == 0 && n1 == 2){
+				if(tab[fila_i][columna_i + 1] == LIDERESAS || tab[fila_i][columna_i + 1] == SUFRAGISTAS){
+					*k = 2;
+					*x = 0;
+					*y = 1;
+				}
+				else{
+					*k = 0;
+				}
+			}
 		}
 	}
 }
+
 
 void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 	int fila_i = fila, columna_i = colum, k = 0, fila_f, columna_f, aux1, aux2, x, y, fil, col;
@@ -803,11 +902,10 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 		columna_f = rand()%16;
 		aux1 = fabs(fila_f - fila_i);
 		aux2 = fabs(columna_f - columna_i);
-		printf("aux1 = %d, aux2 = %d\n", aux1, aux2);
 		//si la diferencia en las filas o las columnas es 2 significa que se esta pensando
 		//en comer una pieza
 		if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' ' || tab[fila_f][columna_f] == ALBERT_HALL){
-			if((aux1 == 2 && aux2 ==1) || (aux1 == 1 && aux2 == 2) || (aux1 == 2 && aux2 == 2)||(aux1 == -2 && aux2 == 1) || (aux1 == -1 && aux2 == 2) || (aux1 == 2 && aux2 == -2) || (aux1 == 2 && aux2 == -1) || (aux1 == 1 && aux2 == -2) || (aux1 == -2 && aux2 == 2)){
+			if((aux1 == 2 && aux2 == 0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
 				if((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
 					//la condicional dice que solo estando en ese rango de posiciones
 					//se puede comer una pieza
@@ -819,6 +917,8 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
 							}if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
 								tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+							}else{
+								tab[fila_i][columna_i] = ' ';
 							}
 						}
 						if(tab[fila_i][columna_i] == POLICIAS){
@@ -827,6 +927,8 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
 							}if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
 								tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+							}else{
+								tab[fila_i][columna_i] = ' ';
 							}
 						}
 						fil = fila_i + x;
@@ -839,6 +941,8 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
 							}if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
 								tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+							}else{
+								tab[fila_i][columna_i] = ' ';
 							}
 						}
 						if(tab[fila_i][columna_i] == POLICIAS){
@@ -847,17 +951,21 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
 							}if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
 								tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+							}else{
+								tab[fila_i][columna_i] = ' ';
 							}
 						}
 					}
 				}
-			}else if((aux1 == 1 && aux2 == 1)||(aux1 == -1 && aux2 == -1)||(aux1 == 1 && aux2 == -1)||(aux1 == -1 && aux2 == 1)||(aux1 == 1 && aux2 == 0)||(aux1 == 0 && aux2 == 1)||(aux1 == -1 && aux2 == 0)||(aux1 == 0 && aux2 == -1)){
+			}else if((aux1 == 1 && aux2 == 1)||(aux1 == 0 && aux2 == 1)||(aux1 == 1 && aux2 == 0)){
 				if(tab[fila_i][columna_i] == INSPECTORES){
 					tab[fila_f][columna_f] = INSPECTORES;
 					if(columna_i > 4 && columna_i < 14){
 						tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
 					}if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
 						tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+					}else{
+						tab[fila_i][columna_i] = ' ';
 					}
 					k = 2;
 				}
@@ -867,7 +975,9 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 						tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
 					}if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
 						tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-				}
+					}else{
+						tab[fila_i][columna_i] = ' ';
+					}
 					k = 2;
 				}
 			}
@@ -876,6 +986,10 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 			k = 0;
 		}
 	}while(k == 0);
+	printf("\nLA COMPUTADORA se mueve de la fila = %d y la columna 1 = %d\n", fila, colum);
+	printf("\na la fila = %d y columna = %d\n", fila_f, columna_f);
+	printf("\nfila au = %d, colum au = %d\n", aux1, aux2);
+
 }
 
 
@@ -884,7 +998,7 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 	srand(time(NULL));
 	do{
 
-		fila_f = rand()%16;//busca una posicion random
+		fila_f = rand()%17;//busca una posicion random
 		columna_f = rand()%16;
 		//printf("\nLlegaaaa!!!\n, %c\n", tab[fila_f][columna_f]);
 		aux1 = fabs(fila_f - fila_i);
@@ -892,7 +1006,8 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 		//si la diferencia en las filas o las columnas es 2 significa que se esta pensando
 		//en comer una pieza
 		if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' ' || tab[fila_f][columna_f] == COMMONS_HOUSE){
-			if((aux1 == 2 && aux2 ==1) || (aux1 == 1 && aux2 == 2) || (aux1 == 2 && aux2 == 2)||(aux1 == -2 && aux2 == 1) || (aux1 == -1 && aux2 == 2) || (aux1 == 2 && aux2 == -2) || (aux1 == 2 && aux2 == -1) || (aux1 == 1 && aux2 == -2) || (aux1 == -2 && aux2 == 2)){
+			if((aux1 == 2 && aux2 ==0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
+				//verifica si se movio 2 casillas en las filas, columnas o en ambas
 				if((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
 					//la condicional dice que solo estando en ese rango de posiciones
 					//se puede comer una pieza
@@ -945,7 +1060,7 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 						}
 					}
 				}
-			}else if((aux1 == 1 && aux2 == 1)||(aux1 == -1 && aux2 == -1)||(aux1 == 1 && aux2 == -1)||(aux1 == -1 && aux2 == 1)||(aux1 == 1 && aux2 == 0)||(aux1 == 0 && aux2 == 1)||(aux1 == -1 && aux2 == 0)||(aux1 == 0 && aux2 == -1)){
+			}else if((aux1 == 1 && aux2 == 1)||(aux1 == 0 && aux2 == 1)||(aux1 == 1 && aux2 == 0)){
 				if(tab[fila_i][columna_i] == LIDERESAS){
 					tab[fila_f][columna_f] = LIDERESAS;
 					if(columna_i > 4 && columna_i < 14){
@@ -975,15 +1090,21 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 			k = 0;
 		}
 	}while(k == 0);
-	printf("\nfila 1 = %d, colum 1 = %d\n", fila, colum);
-	printf("\nfila = %d, colum = %d\n", fila_f, columna_f);
+	printf("\nLA COMPUTADORA se mueve de la fila = %d y la columna 1 = %d\n", fila, colum);
+	printf("\na la fila = %d y columna = %d\n", fila_f, columna_f);
 	printf("\nfila au = %d, colum au = %d\n", aux1, aux2);
-
 }
 
+<<<<<<< HEAD
+void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
+	int a,b,aux1,x=*fila, y=*colum;
+
+	if(Modo==1){// es el turno de los sufragistas
+=======
 
 void mov_ins_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 	int a,b,aux1,x=5, y=13, aux2;
+>>>>>>> 6072a1d63a88a457bf7ac0562c5426740dd646c2
 		do{
 			aux2=0;// variable para controlar la carga de datos
 			if (tab[x][y] == SUFRAGISTAS) { // es el turno de los sufragistas
@@ -1818,25 +1939,18 @@ int cond_de_Gan(int * ganador){//la condicion de ganador es leer la matriz table
 }
 
 void inicializar_tablero(char tab[TAM_TAB][TAM_TAB]){
-	int i, j, number = 0,number1 = 0;
+	int i, j;
 
 	for(i = 0; i < TAM_TAB; i++){
 
 		for(j = 0; j < TAM_TAB; j++){
 			if(j==0 && i!=0){
-
-				char post1 = number + 'a';//a
-				number = number + 1;
-
-				tab[i][j]=post1;
+				tab[i][j]='*';
 
 			}
 			else{
 				if(i==0 && j!=0){
-					char post2 = number1 + 'A';//A
-					number1 = number1 + 1;
-
-					tab[i][j] = post2;
+					tab[i][j] = '*';
 
 				}
 				else{
