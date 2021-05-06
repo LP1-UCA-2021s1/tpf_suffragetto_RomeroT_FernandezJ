@@ -70,6 +70,7 @@ void incio_Juego(char tab[TAM_TAB][TAM_TAB]);
  * La logica de la computadora sera de movimientos randoms
  */
 void mov_cp (char tab[TAM_TAB][TAM_TAB]);
+void mov_cp_pol (int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
 /*
  * MOVIMIENTO DEL USUARIO
  * segun las reglas puede mover una ficha y avanzar una casilla en cualquier direccion por turno
