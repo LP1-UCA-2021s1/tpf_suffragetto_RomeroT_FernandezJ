@@ -346,7 +346,7 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]){
 }
 
 
-void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]]){
+void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 	int a,b,aux1,x=*fila, y=*colum;
 
 	if(Modo==1){// es el turno de los sufragistas
@@ -698,9 +698,9 @@ void inicializar_tablero(char tab[TAM_TAB][TAM_TAB]){
 void tablero(char tab[TAM_TAB][TAM_TAB]){
 	int i, j;
 
-	printf("\n --+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
-	for(i = 0; i < TAM_TAB; i++){
-		for(j = 0; j < TAM_TAB; j++){
+	//printf("\n --+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n");
+	//for(i = 0; i < TAM_TAB; i++){
+		//for(j = 0; j < TAM_TAB; j++){
 
 	printf("\n+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+\n");
 	for(i = 0; i < TAM_TAB; i++){
