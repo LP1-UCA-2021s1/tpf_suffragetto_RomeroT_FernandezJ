@@ -96,7 +96,7 @@ void mov_lid_o_ins (int * fila, int * columna, char tab[TAM_TAB][TAM_TAB]);
  * retornara un valor para k.
  * solo se permite comer en las posiciones columna > 4 y columna < 14
  */
-int funcion_comer(int * k, int * columna_f, int * fila_f, int * fila_i, int * columna_i);
+void funcion_comer(int * k, int columna_f, int fila_f, int fila_i, int columna_i);
 /*
  * Si el usuario quiere liberar fichas en esta funcion se realiza la "negociacion"
  * si hay 12 piezas en el hospital y 12 piezas en la prision cumple con la condicion,

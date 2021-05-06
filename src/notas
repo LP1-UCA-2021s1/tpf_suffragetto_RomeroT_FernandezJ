@@ -20,3 +20,29 @@ PARA EL MENU CUANDO SE REQUIERA JUGADOR VS JUGADOR
 //					}
 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+// MOVIMIENTOS
+int fila_i = *fila, columna_i = *colum, k = 0, fila_f, columna_f, aux1, aux2;
+	do{
+		printf("Introduzca la fila donde quiere mover: ");
+		scanf("%d", &fila_f);
+		printf("Introduzca la columna donde quiere mover: ");
+		scanf("%d", &columna_f);
+		aux1 = fila_f - fila_i;
+		scanf("%u", &aux1);
+		aux2 = columna_f - columna_i;
+		scanf("%u", &aux2);
+		//si la diferencia en las filas o las columnas es 2 significa que se esta pensando
+		//en comer una pieza
+		if((aux1 == 2 && aux2 ==1) || (aux1 == 1 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
+			if((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
+				//la condicional dice que solo estando en ese rango de posiciones
+				//se puede comer una pieza
+				funcion_comer(&k, columna_f, fila_f, fila_i, columna_i);
+			}
+		}else if(aux1 == 1 && aux2 == 1){
+			k = 2;
+		}else{
+			printf("\nJugada invalida!!! vuelva a elegir.\n");
+			k = 0;
+		}
+	}while(k == 0);

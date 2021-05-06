@@ -276,9 +276,266 @@ void mov_us (char tab[TAM_TAB][TAM_TAB]){
 	}
 }
 
-int funcion_comer(int * k, int * columna_f, int * fila_f, int * fila_i, int * columna_i){
+void funcion_comer(int * k, int columna_f, int fila_f, int fila_i, int columna_i){
+	int n, n1;
+	n = fila_f - fila_i;
+	n1 = columna_f - fila_f;
 
-	return 0;
+	if(tab[fila_i][columna_i] == INSPECTORES){
+		//diagonales
+		if(n == 2 && n1 == 2){
+			if(tab[fila_i + 1][columna_i + 1] == LIDERESAS || tab[fila_i + 1][columna_i + 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == -2 && n1 == -2){
+			if(tab[fila_i - 1][columna_i - 1] == LIDERESAS || tab[fila_i - 1][columna_i - 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;
+				}
+			}
+		}
+		else if(n == 2 && n1 == -2){
+			if(tab[fila_i + 1][columna_i - 1] == LIDERESAS || tab[fila_i + 1][columna_i - 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;
+				}
+			}
+		}
+		else if(n == -2 && n == 2){
+			if(tab[fila_i - 1][columna_i + 1] == LIDERESAS || tab[fila_i - 1][columna_i + 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		//vertical y horizontal
+		else if(n == 0 && n == 2){
+			if(tab[fila_i][columna_i + 1] == LIDERESAS || tab[fila_i][columna_i + 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == 2 && n == 0){
+			if(tab[fila_i+1][columna_i] == LIDERESAS || tab[fila_i+1][columna_i] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == 0 && n == -2){
+			if(tab[fila_i][columna_i - 1] == LIDERESAS || tab[fila_i][columna_i - 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == -2 && n == 0){
+			if(tab[fila_i-1][columna_i] == LIDERESAS || tab[fila_i-1][columna_i] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+	}
+	else if(tab[fila_i][columna_i] == POLICIAS){
+		if(n == 2 && n1 == 2){
+			if(tab[fila_i + 1][columna_i + 1] == LIDERESAS || tab[fila_i + 1][columna_i + 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k =1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == -2 && n1 == -2){
+			if(tab[fila_i - 1][columna_i - 1] == LIDERESAS || tab[fila_i - 1][columna_i - 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;
+				}
+			}
+		}
+		else if(n == 2 && n1 == -2){
+			if(tab[fila_i + 1][columna_i - 1] == LIDERESAS || tab[fila_i + 1][columna_i - 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;
+				}
+			}
+		}
+		else if(n == -2 && n == 2){
+			if(tab[fila_i - 1][columna_i + 1] == LIDERESAS || tab[fila_i - 1][columna_i + 1] == SUFRAGISTAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+	}
+	else if(tab[fila_i][columna_i] == LIDERESAS){
+		if(n == 2 && n1 == 2){
+			if(tab[fila_i + 1][columna_i + 1] == INSPECTORES || tab[fila_i + 1][columna_i + 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == -2 && n1 == -2){
+			if(tab[fila_i - 1][columna_i - 1] == INSPECTORES || tab[fila_i - 1][columna_i - 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;
+				}
+			}
+		}
+		else if(n == 2 && n1 == -2){
+			if(tab[fila_i + 1][columna_i - 1] == INSPECTORES || tab[fila_i + 1][columna_i - 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;
+				}
+			}
+		}
+		else if(n == -2 && n == 2){
+			if(tab[fila_i - 1][columna_i + 1] == INSPECTORES || tab[fila_i - 1][columna_i + 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		//vertical y horizontal
+		else if(n == 0 && n == 2){
+			if(tab[fila_i][columna_i + 1] == INSPECTORES || tab[fila_i][columna_i + 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == 2 && n == 0){
+			if(tab[fila_i+1][columna_i] == INSPECTORES || tab[fila_i+1][columna_i] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					 *k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == 0 && n == -2){
+			if(tab[fila_i][columna_i - 1] == INSPECTORES || tab[fila_i][columna_i - 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == -2 && n == 0){
+			if(tab[fila_i-1][columna_i] == INSPECTORES || tab[fila_i-1][columna_i] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+
+	}
+	else if(tab[fila_i][columna_i] == SUFRAGISTAS){
+		if(n == 2 && n1 == 2){
+			if(tab[fila_i + 1][columna_i + 1] == INSPECTORES || tab[fila_i + 1][columna_i + 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+		else if(n == -2 && n1 == -2){
+			if(tab[fila_i - 1][columna_i - 1] == INSPECTORES || tab[fila_i - 1][columna_i - 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;
+				}
+			}
+		}
+		else if(n == 2 && n1 == -2){
+			if(tab[fila_i + 1][columna_i - 1] == INSPECTORES || tab[fila_i + 1][columna_i - 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;
+				}
+			}
+		}
+		else if(n == -2 && n == 2){
+			if(tab[fila_i - 1][columna_i + 1] == INSPECTORES || tab[fila_i - 1][columna_i + 1] == POLICIAS){
+				if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' '){
+					*k = 1;//jugada valida
+				}
+				else{
+					*k = 0;//jugada invalida
+				}
+			}
+		}
+	}
+	else{
+		*k = 0;
+	}
 }
 
 void mov_suf_o_pol (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){//el movimiento de los inspectores y las lideresas son iguales
@@ -286,27 +543,8 @@ void mov_suf_o_pol (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){//el mo
 
 }
 
-void mov_lid_o_ins (int * x, int * y, char tab[TAM_TAB][TAM_TAB]){
+void mov_lid_o_ins (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]){
 	printf("\n HASTA AQUI LLEGUE!! mov_lid_o_ins\n");
-	int fila_i = *fila, columna_i = *colum, k = 0, fila_f, columna_f, aux1, aux2;
-	do{
-		printf("Introduzca la fila donde quiere mover: ");
-		scanf("%d", &fila_f);
-		printf("Introduzca la columna donde quiere mover: ");
-		scanf("%d", &columna_f);
-		aux1 = fila_f - fila_i;
-		scanf("%u", &aux1);
-		aux2 = columna_f - columna_i;
-		scanf("%u", &aux2);
-		if((aux1 == 2 && aux2 ==1) || (aux1 == 1 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
-
-		}else if(aux1 == 1 && aux2 == 1){
-			k = 2;
-		}else{
-			printf("\nJugada invalida!!!\n");
-			k = 0;
-		}
-	}while(k == 0);
 
 }
 
