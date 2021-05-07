@@ -8,6 +8,7 @@
 #ifndef GAME_SUFFRAGETTO_TP_H_
 #define GAME_SUFFRAGETTO_TP_H_
 
+
 //tablero
 #define TAM_TAB	 18
 char tab[TAM_TAB][TAM_TAB];
@@ -58,6 +59,7 @@ void reglas(void);
  * Esta funcion INICIALIZA EL TABLERO
  * llena las casillas libres dependiendo de la ubicacion
  * coloca las fichas en su posicion inicial
+ * retorna un tablero, con las pocisiones de las piezas y las regiones.
  */
 void inicializar_tablero(char tab[TAM_TAB][TAM_TAB]);
 /*
@@ -89,39 +91,47 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
  */
 void mov_us (char tab[TAM_TAB][TAM_TAB]);
 /*
+ * VERIFICACION DE MOVIMIENTO DEL USUARIO CUANDO JUEGA CON LAS SUFRAGISTAS
  * una funcion que realiza los movimientos de las piezas
  * recibe como parametros la fila, la columna y el tablero
- * en esta funcion verifica los movimientos del jugador, segun su pieza, aquel que tiene menos movilidad
- * al comer, en este caso las sufragistas y los policias solo comen si la posicion del contricante
- * es en diagonal.
+ * retorna los cambios en el tablero.
  */
-void mov_lid_o_ins (int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]);
+void mov_lid_o_suf (int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
 /*
- * en esta funcion se verifican los movimientos del jugador de las piezas que tienen mas movilidad al comer
+ * VERIFICACION DE MOVIMIENTO DE USUARIO CUANDO JUEGA CON LOS POLICIAS
+ * en esta funcion se verifican los movimientos del usuario cuando le toca jugar con los policias o inspectores
+ * sus parametros son la fila y columna iniciales introducidas de la funcion mov_us
  * en el caso de las lideresas y los inspectores que pueden comer en todas las direcciones.
+ * retorna los cambios en el tablero
  */
-void mov_suf_o_pol(int * fila, int * colum, char tab[TAM_TAB][TAM_TAB]);
+void mov_ins_o_pol(int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
 /*
+ * FUNCIONES DE TRANSLADOS DE PIEZAS COMIDAS
  * funcion que lleva a las piezas comidas al hospital o a la prision
  * parametros la fila y columna donde estaba la pieza comida
- * retorna los cambios en el tablero
+ * para verificar que piezas son, si son lideresas o sufragistas, inspectores o policias
+ * retorna los cambios en el tablero, mostrando en los hospitales o prision cuantas piezas hay.
  */
 void piezas_comidas_sl(int *fil, int *col, char tab[TAM_TAB][TAM_TAB]);
 
 void piezas_comidas_pi(int *fil, int *col, char tab[TAM_TAB][TAM_TAB]);
 
 /*
+ * FUNCIONES DE COMER
  * esta funcion determina si es valido comer una pieza
  * recibe como parametros un auxiliar k, la fila y columna final y tb la fila y columna inicial
- * retornara un valor para k.
+ * retornara un valor para k, un valor de x e y que seria donde se encuentra la pieza que va a ser comida.
  * solo se permite comer en las posiciones columna > 4 y columna < 14
  */
 void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_i, int columna_i);
+
 void funcion_comer_ins_y_pol(int * k, int *x, int *y, int columna_f, int fila_f, int fila_i, int columna_i);
 /*
+ * FUNCION DE NEGOCIACION
  * Si el usuario quiere liberar fichas en esta funcion se realiza la "negociacion"
  * si hay 12 piezas en el hospital y 12 piezas en la prision cumple con la condicion,
  * 6 piezas son llevadas a los patios o terrenos.
+ * retorna los cambios en el tablero.
  *
  */
 void liberacion(char tab[TAM_TAB][TAM_TAB]);
@@ -134,6 +144,7 @@ void liberacion(char tab[TAM_TAB][TAM_TAB]);
  * la funcion evalua y si se cumple esta condicion, lleva 6 fichas de cada bando a
  * los del hospital -----> Hospital Grounds
  * y los de la prision -----> Prison Yard
+ *
  */
 void cond_libertad(char tab[TAM_TAB][TAM_TAB]);
 
@@ -150,7 +161,5 @@ int cond_de_Gan(int * ganador);
  * IMPRIME EL TABLERO
  */
 void tablero(char tab[TAM_TAB][TAM_TAB]);
-
-
 
 #endif /* GAME_SUFFRAGETTO_TP_H_ */
