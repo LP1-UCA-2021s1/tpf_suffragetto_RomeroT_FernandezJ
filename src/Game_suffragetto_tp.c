@@ -966,7 +966,29 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 		if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' ' || tab[fila_f][columna_f] == ALBERT_HALL){
 			if((aux1 == 2 && aux2 == 0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
 				funcion_comer_ins_y_pol(&k, &x, &y, columna_f, fila_f, fila_i, columna_i);
-				if((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
+				if(k == 2){//si retorna 2 significa que hay una aliado y por lo tanto puede saltar
+					if(tab[fila_i][columna_i] == INSPECTORES){
+						tab[fila_f][columna_f] = INSPECTORES;
+						if(columna_i > 4 && columna_i < 14){
+							tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
+						}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
+							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+						}else{
+							tab[fila_i][columna_i] = ' ';
+						}
+					}
+					if(tab[fila_i][columna_i] == POLICIAS){
+						tab[fila_f][columna_f] = POLICIAS;
+						if(columna_i > 4 && columna_i < 14){
+							tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
+						}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
+							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+						}else{
+							tab[fila_i][columna_i] = ' ';
+						}
+					}
+				}
+				else if((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
 					//la condicional dice que solo estando en ese rango de posiciones
 					//se puede comer una pieza
 					if(k == 1){//el retorno de la funcion es k si k es 1 significa que se puede comer la pieza
@@ -993,27 +1015,6 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 						fil = fila_i + x;
 						col = columna_i + y;
 						piezas_comidas_sl(&fil, &col, tab);
-					}
-				}else if(k == 2){//si retorna 2 significa que hay una aliado y por lo tanto puede saltar
-					if(tab[fila_i][columna_i] == INSPECTORES){
-						tab[fila_f][columna_f] = INSPECTORES;
-						if(columna_i > 4 && columna_i < 14){
-							tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-						}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
-							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-						}else{
-							tab[fila_i][columna_i] = ' ';
-						}
-					}
-					if(tab[fila_i][columna_i] == POLICIAS){
-						tab[fila_f][columna_f] = POLICIAS;
-						if(columna_i > 4 && columna_i < 14){
-							tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-						}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
-							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-						}else{
-							tab[fila_i][columna_i] = ' ';
-						}
 					}
 				}
 			}else if((aux1 == 1 && aux2 == 1)||(aux1 == 0 && aux2 == 1)||(aux1 == 1 && aux2 == 0)){
@@ -1170,7 +1171,29 @@ void mov_ins_o_pol(int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 				if((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
 					//la condicional dice que solo estando en ese rango de posiciones
 					//se puede comer una pieza
-					if(k == 1){//el retorno de la funcion es k si k es 1 significa que se puede comer la pieza
+					if(k == 2){//si retorna 2 significa que hay una aliado y por lo tanto puede saltar
+						if(tab[fila_i][columna_i] == INSPECTORES){
+							tab[fila_f][columna_f] = INSPECTORES;
+							if(columna_i > 4 && columna_i < 14){
+								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
+							}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
+								tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+							}else{
+								tab[fila_i][columna_i] = ' ';
+							}
+						}
+						if(tab[fila_i][columna_i] == POLICIAS){
+							tab[fila_f][columna_f] = POLICIAS;
+							if(columna_i > 4 && columna_i < 14){
+								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
+							}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
+								tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+							}else{
+								tab[fila_i][columna_i] = ' ';
+							}
+						}
+					}
+					else if(k == 1){//el retorno de la funcion es k si k es 1 significa que se puede comer la pieza
 						if(tab[fila_i][columna_i] == INSPECTORES){
 							tab[fila_f][columna_f] = INSPECTORES;
 							if(columna_i > 4 && columna_i < 14){
@@ -1194,27 +1217,6 @@ void mov_ins_o_pol(int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 						fil = fila_i + x;
 						col = columna_i + y;
 						piezas_comidas_sl(&fil, &col, tab);
-					}
-				}else if(k == 2){//si retorna 2 significa que hay una aliado y por lo tanto puede saltar
-					if(tab[fila_i][columna_i] == INSPECTORES){
-						tab[fila_f][columna_f] = INSPECTORES;
-						if(columna_i > 4 && columna_i < 14){
-							tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-						}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
-							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-						}else{
-							tab[fila_i][columna_i] = ' ';
-						}
-					}
-					if(tab[fila_i][columna_i] == POLICIAS){
-						tab[fila_f][columna_f] = POLICIAS;
-						if(columna_i > 4 && columna_i < 14){
-							tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-						}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
-							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-						}else{
-							tab[fila_i][columna_i] = ' ';
-						}
 					}
 				}else if(k == 0){
 					printf("Movimiento invalido.\nVuelva a seleccionar.\n");
@@ -1469,13 +1471,13 @@ int cond_de_Gan(int * ganador){//la condicion de ganador es leer la matriz table
 	 */
 	if(con == 0){
 		printf("\n		*-*-*-**-*-*GANAN LOS POLICIAS!!!*-*-*-**-*-*");
-		return 2;
+		return *ganador = 2;
 	}
 	if(cont == 0){
 		printf("\n		*-*-*-**-*-*GANAN LAS SUFRAGISTAS!!!*-*-*-**-*-*");
-		return 3;
+		return *ganador = 3;
 	}else{//todavia no hay ganador
-		return 1;
+		return *ganador = 1;
 	}
 }
 
