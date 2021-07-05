@@ -89,6 +89,11 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
  * Los de bajo rango solo pueden comer de manera diagonal
  * y Los de alto rango en todas las direcciones, haciendo un salto de dos casillas sobre la ficha contraria
  */
+float menor_distancia_p(int * , int * );
+float menor_distancia_f(int * , int * );
+/*funciones que busca la menor distancia de la dichas seleccionadas
+ * hacia las casillas protegidas por sus contrarios
+ */
 void mov_us (char tab[TAM_TAB][TAM_TAB]);
 /*
  * VERIFICACION DE MOVIMIENTO DEL USUARIO CUANDO JUEGA CON LAS SUFRAGISTAS
@@ -161,5 +166,6 @@ int cond_de_Gan(int * ganador);
  * IMPRIME EL TABLERO
  */
 void tablero(char tab[TAM_TAB][TAM_TAB]);
+
 
 #endif /* GAME_SUFFRAGETTO_TP_H_ */

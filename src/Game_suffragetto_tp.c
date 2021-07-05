@@ -954,6 +954,7 @@ void funcion_comer(int * k, int *x, int *y, int columna_f, int fila_f, int fila_
 
 void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 	int fila_i = fila, columna_i = colum, k = 0, fila_f, columna_f, aux1, aux2, x, y, fil, col;
+	float dis_i = 0, dis_f = 0 ;
 	srand(time(NULL));
 	do{
 		fila_f = rand()%17;//busca una posicion random
@@ -965,81 +966,90 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 
 		if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' ' || tab[fila_f][columna_f] == ALBERT_HALL){
 			if((aux1 == 2 && aux2 == 0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
-				funcion_comer_ins_y_pol(&k, &x, &y, columna_f, fila_f, fila_i, columna_i);
-				if(k == 2){//si retorna 2 significa que hay una aliado y por lo tanto puede saltar
-					if(tab[fila_i][columna_i] == INSPECTORES){
-						tab[fila_f][columna_f] = INSPECTORES;
-						if(columna_i > 4 && columna_i < 14){
-							tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-						}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
-							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-						}else{
-							tab[fila_i][columna_i] = ' ';
-						}
-					}
-					if(tab[fila_i][columna_i] == POLICIAS){
-						tab[fila_f][columna_f] = POLICIAS;
-						if(columna_i > 4 && columna_i < 14){
-							tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-						}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
-							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-						}else{
-							tab[fila_i][columna_i] = ' ';
-						}
-					}
-				}
-				else if((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
-					//la condicional dice que solo estando en ese rango de posiciones
-					//se puede comer una pieza
-					if(k == 1){//el retorno de la funcion es k si k es 1 significa que se puede comer la pieza
-						if(tab[fila_i][columna_i] == INSPECTORES){
+				dis_i = menor_distancia_p(&fila_i, &columna_i);
+				dis_f = menor_distancia_p(&fila_f, &columna_f);
+				if(dis_f <= dis_i ){//verifica que las fichas se muevan en la direccion hacia adelante
+					funcion_comer_ins_y_pol(&k, &x, &y, columna_f, fila_f, fila_i, columna_i);
+					if (k == 2) {//si retorna 2 significa que hay una aliado y por lo tanto puede saltar
+						if (tab[fila_i][columna_i] == INSPECTORES) {
 							tab[fila_f][columna_f] = INSPECTORES;
-							if(columna_i > 4 && columna_i < 14){
-								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-							}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
+							if (columna_i > 4 && columna_i < 14) {
+								tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+							} else if (fila_i > 11 && columna_i == 2) {	//saca a los policias del hospital
 								tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-							}else{
+							} else {
 								tab[fila_i][columna_i] = ' ';
 							}
 						}
-						if(tab[fila_i][columna_i] == POLICIAS){
+						if (tab[fila_i][columna_i] == POLICIAS) {
 							tab[fila_f][columna_f] = POLICIAS;
-							if(columna_i > 4 && columna_i < 14){
-								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-							}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
+							if (columna_i > 4 && columna_i < 14) {
+								tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+							} else if (fila_i > 11 && columna_i == 2) {	//saca a los policias del hospital
 								tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-							}else{
+							} else {
 								tab[fila_i][columna_i] = ' ';
 							}
 						}
-						fil = fila_i + x;
-						col = columna_i + y;
-						piezas_comidas_sl(&fil, &col, tab);
+					} else if ((columna_i > 4 && columna_i < 14)&& (columna_f > 3 && columna_f < 15)) {
+						//la condicional dice que solo estando en ese rango de posiciones
+						//se puede comer una pieza
+						if (k == 1) {//el retorno de la funcion es k si k es 1 significa que se puede comer la pieza
+							if (tab[fila_i][columna_i] == INSPECTORES) {
+								tab[fila_f][columna_f] = INSPECTORES;
+								if (columna_i > 4 && columna_i < 14) {
+									tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+								} else if (fila_i > 11 && columna_i == 2) {	//saca a los policias del hospital
+									tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+								} else {
+									tab[fila_i][columna_i] = ' ';
+								}
+							}
+							if (tab[fila_i][columna_i] == POLICIAS) {
+								tab[fila_f][columna_f] = POLICIAS;
+								if (columna_i > 4 && columna_i < 14) {
+									tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+								} else if (fila_i > 11 && columna_i == 2) {	//saca a los policias del hospital
+									tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+								} else {
+									tab[fila_i][columna_i] = ' ';
+								}
+							}
+							fil = fila_i + x;
+							col = columna_i + y;
+							piezas_comidas_sl(&fil, &col, tab);
+						}
 					}
 				}
 			}else if((aux1 == 1 && aux2 == 1)||(aux1 == 0 && aux2 == 1)||(aux1 == 1 && aux2 == 0)){
-				if(tab[fila_i][columna_i] == INSPECTORES){
-					tab[fila_f][columna_f] = INSPECTORES;
-					if(columna_i > 4 && columna_i < 14){
-						tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-					}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
-						tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-					}else{
-						tab[fila_i][columna_i] = ' ';
+				dis_i = menor_distancia_p(&fila_i, &columna_i);
+				dis_f = menor_distancia_p(&fila_f, &columna_f);
+				if (dis_f <= dis_i){//verifica que las fichas se muevan en la direccion hacia adelante
+					if (tab[fila_i][columna_i] == INSPECTORES) {
+						tab[fila_f][columna_f] = INSPECTORES;
+						if (columna_i > 4 && columna_i < 14) {
+							tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+						} else if (fila_i > 11 && columna_i == 2) {	//saca a los policias del hospital
+							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+						} else {
+							tab[fila_i][columna_i] = ' ';
+						}
+						k = 2;
 					}
-					k = 2;
-				}
-				if(tab[fila_i][columna_i] == POLICIAS){
-					tab[fila_f][columna_f] = POLICIAS;
-					if(columna_i > 4 && columna_i < 14){
-						tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-					}else if(fila_i > 11 && columna_i == 2){//saca a los policias del hospital
-						tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
-					}else{
-						tab[fila_i][columna_i] = ' ';//espacio en la zona neutral
+					if (tab[fila_i][columna_i] == POLICIAS) {
+						tab[fila_f][columna_f] = POLICIAS;
+						if (columna_i > 4 && columna_i < 14) {
+							tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+						} else if (fila_i > 11 && columna_i == 2) {	//saca a los policias del hospital
+							tab[fila_i][columna_i] = HOSPITAL_GROUNDS;
+						} else {
+							tab[fila_i][columna_i] = ' ';//espacio en la zona neutral
+						}
+						k = 2;
 					}
-					k = 2;
+
 				}
+
 			}
 		}else{
 			k = 0;
@@ -1053,6 +1063,7 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 
 void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 	int fila_i = fila, columna_i = colum, k = 0, fila_f, columna_f, aux1, aux2, x, y, fil, col;
+	float dis_i = 0, dis_f = 0 ;
 	srand(time(NULL));
 	do{
 
@@ -1065,83 +1076,94 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 		//en comer una pieza
 		if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' ' || tab[fila_f][columna_f] == COMMONS_HOUSE){
 			if((aux1 == 2 && aux2 ==0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
-				//verifica si se movio 2 casillas en las filas, columnas o en ambas
-				funcion_comer(&k, &x, &y, columna_f, fila_f, fila_i, columna_i);
-				if ((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
-					//la condicional dice que solo estando en ese rango de posiciones
-					//se puede comer una pieza
-					if(k == 2){//verifica que se salto sobre un aliado
-						if(tab[fila_i][columna_i] == LIDERESAS){
-							tab[fila_f][columna_f] = LIDERESAS;
-							if(columna_i > 4 && columna_i < 14){
-								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-							}else if(fila_i > 11 && columna_i == 2){//saca a las lideresas de la prision
-								tab[fila_i][columna_i] = PRISON_YARD;
-							}else{
-								tab[fila_i][columna_i] = ' ';
+				dis_i = menor_distancia_f(&fila_i, &columna_i);
+				dis_f = menor_distancia_f(&fila_f, &columna_f);
+				if (dis_f <= dis_i){ //verifica que las fichas se muevan en la direccion hacia adelante
+					//verifica si se movio 2 casillas en las filas, columnas o en ambas
+					funcion_comer(&k, &x, &y, columna_f, fila_f, fila_i, columna_i);
+					if ((columna_i > 4 && columna_i < 14)&& (columna_f > 3 && columna_f < 15)) {
+						//la condicional dice que solo estando en ese rango de posiciones
+						//se puede comer una pieza
+						if (k == 2) {	//verifica que se salto sobre un aliado
+							if (tab[fila_i][columna_i] == LIDERESAS) {
+								tab[fila_f][columna_f] = LIDERESAS;
+								if (columna_i > 4 && columna_i < 14) {
+									tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+								} else if (fila_i > 11 && columna_i == 2) {	//saca a las lideresas de la prision
+									tab[fila_i][columna_i] = PRISON_YARD;
+								} else {
+									tab[fila_i][columna_i] = ' ';
+								}
 							}
-						}
-						if(tab[fila_i][columna_i] == SUFRAGISTAS){
-							tab[fila_f][columna_f] = SUFRAGISTAS;
-							if(columna_i > 4 && columna_i < 14){
-								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-							}else if(fila_i > 11 && columna_i == 2){//saca a las sufragistas de la prision
-								tab[fila_i][columna_i] = PRISON_YARD;
-							}else{
-								tab[fila_i][columna_i] = ' ';
+							if (tab[fila_i][columna_i] == SUFRAGISTAS) {
+								tab[fila_f][columna_f] = SUFRAGISTAS;
+								if (columna_i > 4 && columna_i < 14) {
+									tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+								} else if (fila_i > 11 && columna_i == 2) {	//saca a las sufragistas de la prision
+									tab[fila_i][columna_i] = PRISON_YARD;
+								} else {
+									tab[fila_i][columna_i] = ' ';
+								}
 							}
+						} else if (k == 1) {//el retorno de la funcion es k si k es 1 significa que se puede comer la pieza
+							if (tab[fila_i][columna_i] == LIDERESAS) {
+								tab[fila_f][columna_f] = LIDERESAS;
+								if (columna_i > 4 && columna_i < 14) {
+									tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+								} else if (fila_i > 11 && columna_i == 2) {	//saca a las lideresas de la prision
+									tab[fila_i][columna_i] = PRISON_YARD;
+								} else {
+									tab[fila_i][columna_i] = ' ';
+								}
+							}
+							if (tab[fila_i][columna_i] == SUFRAGISTAS) {
+								tab[fila_f][columna_f] = SUFRAGISTAS;
+								if (columna_i > 4 && columna_i < 14) {
+									tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+								} else if (fila_i > 11 && columna_i == 2) {	//saca a las sufragistas de la prision
+									tab[fila_i][columna_i] = PRISON_YARD;
+								} else {
+									tab[fila_i][columna_i] = ' ';
+								}
+							}
+							fil = fila_i + x;
+							col = columna_i + y;
+							piezas_comidas_pi(&fil, &col, tab);
 						}
 					}
-					else if(k == 1){//el retorno de la funcion es k si k es 1 significa que se puede comer la pieza
-						if(tab[fila_i][columna_i] == LIDERESAS){
-							tab[fila_f][columna_f] = LIDERESAS;
-							if(columna_i > 4 && columna_i < 14){
-								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-							}else if(fila_i > 11 && columna_i == 2){//saca a las lideresas de la prision
-								tab[fila_i][columna_i] = PRISON_YARD;
-							}else{
-								tab[fila_i][columna_i] = ' ';
-							}
-						}
-						if(tab[fila_i][columna_i] == SUFRAGISTAS){
-							tab[fila_f][columna_f] = SUFRAGISTAS;
-							if(columna_i > 4 && columna_i < 14){
-								tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-							}else if(fila_i > 11 && columna_i == 2){//saca a las sufragistas de la prision
-								tab[fila_i][columna_i] = PRISON_YARD;
-							}else{
-								tab[fila_i][columna_i] = ' ';
-							}
-						}
-						fil = fila_i + x;
-						col = columna_i + y;
-						piezas_comidas_pi(&fil, &col, tab);
-					}
+
 				}
 
+
 			}else if((aux1 == 1 && aux2 == 1)||(aux1 == 0 && aux2 == 1)||(aux1 == 1 && aux2 == 0)){
-				if(tab[fila_i][columna_i] == LIDERESAS){
-					tab[fila_f][columna_f] = LIDERESAS;
-					if(columna_i > 4 && columna_i < 14){
-						tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-					}else if(fila_i > 11 && columna_i == 2){//saca a las lideresas de la prision
-						tab[fila_i][columna_i] = PRISON_YARD;
-					}else{
-						tab[fila_i][columna_i] = ' ';
+				dis_i = menor_distancia_f(&fila_i, &columna_i);
+				dis_f = menor_distancia_f(&fila_f, &columna_f);
+				if (dis_f <= dis_i){//verifica que las fichas se muevan en la direccion hacia adelante
+					if (tab[fila_i][columna_i] == LIDERESAS) {
+						tab[fila_f][columna_f] = LIDERESAS;
+						if (columna_i > 4 && columna_i < 14) {
+							tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+						} else if (fila_i > 11 && columna_i == 2) {	//saca a las lideresas de la prision
+							tab[fila_i][columna_i] = PRISON_YARD;
+						} else {
+							tab[fila_i][columna_i] = ' ';
+						}
+						k = 2;
 					}
-					k = 2;
-				}
-				if(tab[fila_i][columna_i] == SUFRAGISTAS){
-					tab[fila_f][columna_f] = SUFRAGISTAS;
-					if(columna_i > 4 && columna_i < 14){
-						tab[fila_i][columna_i] = THE_ARENA;//deja la representacion de la arena vacia
-					}else if(fila_i > 11 && columna_i == 2){//saca a las sufragistas de la prision
-						tab[fila_i][columna_i] = PRISON_YARD;
-					}else{
-						tab[fila_i][columna_i] = ' ';
+					if (tab[fila_i][columna_i] == SUFRAGISTAS) {
+						tab[fila_f][columna_f] = SUFRAGISTAS;
+						if (columna_i > 4 && columna_i < 14) {
+							tab[fila_i][columna_i] = THE_ARENA;	//deja la representacion de la arena vacia
+						} else if (fila_i > 11 && columna_i == 2) {	//saca a las sufragistas de la prision
+							tab[fila_i][columna_i] = PRISON_YARD;
+						} else {
+							tab[fila_i][columna_i] = ' ';
+						}
+						k = 2;
 					}
-					k = 2;
+
 				}
+
 
 			}
 		}else{
@@ -1620,6 +1642,38 @@ void tablero(char tab[TAM_TAB][TAM_TAB]){
 		}
 		printf("\n+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+\n");
 	}
+}
+float menor_distancia_p(int *inix, int *iniy){
+	float aux = 100;
+	int i,j;
+	for (i = 4; i <= 5; i++) {
+		for (j = 8; j <= 10; j++) {
+
+			float D = sqrt(pow(i - *inix, 2) + pow(j - *iniy, 2)); //modulo de un vector
+			if (D < aux) {
+				aux = D;
+			}
+		}
+	}
+
+	return aux;
+
+}
+float menor_distancia_f(int *inix, int *iniy){
+	float aux = 100;
+	int i,j;
+	for (i = 13; i <= 14; i++) {
+		for (j = 8; j <= 10; j++) {
+
+			float D = sqrt(pow(i - *inix, 2) + pow(j - *iniy, 2));//modulo de un vector
+			if (D < aux) {
+				aux = D;
+			}
+		}
+	}
+
+	return aux;
+
 }
 
 int main(void) {
