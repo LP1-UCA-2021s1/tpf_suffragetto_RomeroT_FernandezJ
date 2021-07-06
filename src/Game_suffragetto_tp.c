@@ -966,9 +966,9 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 
 		if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' ' || tab[fila_f][columna_f] == ALBERT_HALL){
 			if((aux1 == 2 && aux2 == 0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
-				dis_i = menor_distancia_p(&fila_i, &columna_i);
-				dis_f = menor_distancia_p(&fila_f, &columna_f);
-				if(dis_f <= dis_i ){//verifica que las fichas se muevan en la direccion hacia adelante
+				dis_i = menor_distancia_p(&fila_i, &columna_i);// menor distancia de la casilla origen con relacion a las casillas protegidas por los contrarios
+				dis_f = menor_distancia_p(&fila_f, &columna_f);// menor distancia de la casilla final con relacion a las casillas protegidas por los contrarios
+				if(dis_f <= dis_i ){//verifica que las fichas se muevan en la direccion hacia las casillas protegidas por los contrarios
 					funcion_comer_ins_y_pol(&k, &x, &y, columna_f, fila_f, fila_i, columna_i);
 					if (k == 2) {//si retorna 2 significa que hay una aliado y por lo tanto puede saltar
 						if (tab[fila_i][columna_i] == INSPECTORES) {
@@ -1022,9 +1022,9 @@ void mov_cp_pol_e_ins (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 					}
 				}
 			}else if((aux1 == 1 && aux2 == 1)||(aux1 == 0 && aux2 == 1)||(aux1 == 1 && aux2 == 0)){
-				dis_i = menor_distancia_p(&fila_i, &columna_i);
-				dis_f = menor_distancia_p(&fila_f, &columna_f);
-				if (dis_f <= dis_i){//verifica que las fichas se muevan en la direccion hacia adelante
+				dis_i = menor_distancia_p(&fila_i, &columna_i);// menor distancia de la casilla origen con relacion a las casillas protegidas por los contrarios
+				dis_f = menor_distancia_p(&fila_f, &columna_f);// menor distancia de la casilla final con relacion a las casillas protegidas por los contrarios
+				if (dis_f <= dis_i){//verifica que las fichas se muevan en la direccion hacia las casillas protegidas por los contrarios
 					if (tab[fila_i][columna_i] == INSPECTORES) {
 						tab[fila_f][columna_f] = INSPECTORES;
 						if (columna_i > 4 && columna_i < 14) {
@@ -1076,9 +1076,9 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 		//en comer una pieza
 		if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' ' || tab[fila_f][columna_f] == COMMONS_HOUSE){
 			if((aux1 == 2 && aux2 ==0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
-				dis_i = menor_distancia_f(&fila_i, &columna_i);
-				dis_f = menor_distancia_f(&fila_f, &columna_f);
-				if (dis_f <= dis_i){ //verifica que las fichas se muevan en la direccion hacia adelante
+				dis_i = menor_distancia_f(&fila_i, &columna_i);// menor distancia de la casilla origen con relacion a las casillas protegidas por los contrarios
+				dis_f = menor_distancia_f(&fila_f, &columna_f);// menor distancia de la casilla final con relacion a las casillas protegidas por los contrarios
+				if (dis_f <= dis_i){ //verifica que las fichas se muevan en la direccion hacia las casillas protegidas por los contrarios
 					//verifica si se movio 2 casillas en las filas, columnas o en ambas
 					funcion_comer(&k, &x, &y, columna_f, fila_f, fila_i, columna_i);
 					if ((columna_i > 4 && columna_i < 14)&& (columna_f > 3 && columna_f < 15)) {
@@ -1136,9 +1136,9 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 
 
 			}else if((aux1 == 1 && aux2 == 1)||(aux1 == 0 && aux2 == 1)||(aux1 == 1 && aux2 == 0)){
-				dis_i = menor_distancia_f(&fila_i, &columna_i);
-				dis_f = menor_distancia_f(&fila_f, &columna_f);
-				if (dis_f <= dis_i){//verifica que las fichas se muevan en la direccion hacia adelante
+				dis_i = menor_distancia_f(&fila_i, &columna_i);// menor distancia de la casilla origen con relacion a las casillas protegidas por los contrarios
+				dis_f = menor_distancia_f(&fila_f, &columna_f);// menor distancia de la casiila final  con relacion a las casillas protegidas por los contrarios
+				if (dis_f <= dis_i){//verifica que las fichas se muevan en la direccion hacia las casillas protegidas por los contrarios
 					if (tab[fila_i][columna_i] == LIDERESAS) {
 						tab[fila_f][columna_f] = LIDERESAS;
 						if (columna_i > 4 && columna_i < 14) {
@@ -1188,7 +1188,8 @@ void mov_ins_o_pol(int fila, int colum, char tab[TAM_TAB][TAM_TAB]){
 		//en comer una pieza
 
 		if(tab[fila_f][columna_f] == THE_ARENA || tab[fila_f][columna_f] == ' ' || tab[fila_f][columna_f] == ALBERT_HALL){
-			if((aux1 == 2 && aux2 == 0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
+			if((aux1 == 2 &
+					& aux2 == 0) || (aux1 == 0 && aux2 == 2) || (aux1 == 2 && aux2 == 2)){
 				funcion_comer_ins_y_pol(&k, &x, &y, columna_f, fila_f, fila_i, columna_i);
 				if((columna_i > 4 && columna_i < 14) && (columna_f > 3 && columna_f < 15)){
 					//la condicional dice que solo estando en ese rango de posiciones
