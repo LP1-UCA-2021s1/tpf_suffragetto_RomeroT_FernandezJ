@@ -91,7 +91,7 @@ void mov_cp_suf_y_lid (int fila, int colum, char tab[TAM_TAB][TAM_TAB]);
  */
 float menor_distancia_p(int * , int * );
 float menor_distancia_f(int * , int * );
-/*funciones que busca la menor distancia de la dichas seleccionadas
+/*funciones que busca la menor distancia de las casillas seleccionadas
  * hacia las casillas protegidas por sus contrarios
  */
 void mov_us (char tab[TAM_TAB][TAM_TAB]);
